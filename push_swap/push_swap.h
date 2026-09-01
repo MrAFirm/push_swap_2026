@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:52:43 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/08/28 17:55:44 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/08/31 22:22:24 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ typedef struct	stack_b
 	struct stack_a	*push_num;
 }	t_stack_b;
 
+/* Algorithms */
 void	bubble_sort(t_stack_a *stack_a);
+void    block_sort(t_stack_a *stack_a);
+
+/* Operations */
 void	swap_a(t_stack_a *stack_a);
 void	rotate_a(t_stack_a *stack_a);
 void	rrotate_a(t_stack_a *stack_a);
