@@ -6,12 +6,13 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 22:15:32 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/08 22:32:01 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/09 17:19:29 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b);
 static int	*coords_compress(t_stack_a *stack_a);
 static int	block_size(t_stack_a *stack_a);
 static int	ft_sqrt(int nb);
@@ -19,8 +20,85 @@ static int	ft_sqrt(int nb);
 void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b)
 {
 	t_list	*head;
-	t_list	*current;
+	int		size;
+	int		i;
+	// int		j;
+	int		range_start;
+	int		range_end;
+	int		iter;
+	int		blocksize;
+	int		*arr;
 
+	head = stack_a->top;
+	size = (int)ft_lstsize(head);
+	i = 0;
+	// j = 0;
+	blocksize = block_size(stack_a);
+	arr = coords_compress(stack_a);
+	range_start = 0;
+	iter = range_start;
+	range_end = blocksize - 1;
+	// while ((unsigned int)i < ft_lstsize(head))
+	// {
+	// 	printf("Current: %d\nIndex: %d\n", stack_a->top->content, stack_a->top->index);
+	// 	i++;
+	// 	stack_a->top = stack_a->top->next;
+	// }
+	while (range_end < size)
+	{
+		// j = 0;
+		while (iter <= range_end)
+		{
+			// printf("A top: %p\n", (void *)stack_a->top);
+			if (stack_a->top->index >= range_start && stack_a->top->index <= range_end)
+			{
+				push_b(stack_a, stack_b);
+				iter++;
+			}
+			else
+				rotate_a(stack_a);
+		}
+		if (stack_b->top)
+			de_bubble_sort(stack_a, stack_b);
+		if (range_end != size - 1)
+		{
+			range_start += blocksize;
+			iter = range_start;
+			range_end += blocksize;
+		}
+	}
+}
+
+
+static void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b)
+{
+	size_t	i;
+	size_t	j;
+	t_list	*head;
+
+	i = 0;
+	head = stack_b->top;
+	while (i < ft_lstsize(head))
+	{
+		j = 0;
+		while (j < ft_lstsize(head) - i - 1)
+		{
+			if (stack_b->top->content < stack_b->top->next->content)
+				swap_b(stack_b);
+			rotate_b(stack_b);
+			j++;
+		}
+		while (j < ft_lstsize(head))
+		{
+			rotate_b(stack_b);
+			j++;
+		}
+		i++;
+	}
+	while (stack_b->top)
+	{
+		push_a(stack_a, stack_b);
+	}
 }
 
 static int	*coords_compress(t_stack_a *stack_a)
@@ -88,6 +166,7 @@ static int	block_size(t_stack_a *stack_a)
 
 /*
 k ≈ √n (Check notes) with custom sqrt function.
+O(n√n)
 */
 
 static int	ft_sqrt(int nb)
@@ -109,7 +188,8 @@ static int	ft_sqrt(int nb)
 int main()
 {
 	t_stack_a	stack_a;
-	// t_stack_b	stack_b;
+	t_stack_b	stack_b;
+	stack_b.top = NULL;
 	t_list	*head = NULL;
 	t_list	*current;
 	t_list	*new = ft_lstnew(2);
@@ -120,10 +200,17 @@ int main()
 	ft_lstadd_front(&head, new2);
 	ft_lstadd_front(&head, new);
 	stack_a.top = head;
+
+	current = stack_a.top;
+	int	c = 0;
+	while (current)
+	{
+		printf("%d: %i\n", c, current->content);
+		current = current->next;
+		c++;
+	}
 	// bubble_sort(&stack_a);
-	int	*arr = coords_compress(&stack_a);
-	int i = 0;
-	// range_sort_algo(&stack_a, &stack_b);
+	range_sort_algo(&stack_a, &stack_b);
 
 	// while ((unsigned int)i < ft_lstsize(stack_a.top))
 	// {
@@ -134,6 +221,7 @@ int main()
 	
 	// current = head;
 	// int	c = 0;
+	// current = stack_a.top;
 	// while (current)
 	// {
 	// 	printf("%d: %i\n", c, current->content);
@@ -141,12 +229,6 @@ int main()
 	// 	c++;
 	// }
 
-	current = stack_a.top;
-	while ((unsigned int)i < ft_lstsize(stack_a.top))
-	{
-		printf("Index[Node: %d: %d]: %d\n", current->content, arr[i], current->index);
-		i++;
-		current = current->next;
-	}
-	printf("Block Size: %d\n", block_size(&stack_a));
+	
+	
 }
