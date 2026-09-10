@@ -22,7 +22,7 @@ void	custom_adapt_algo(char *argv, t_stack_a *stack_a, t_stack_b *stack_b)
 	if (argv[i] == "--adaptive")
 	{
 		disorder = compute_disorder(&stack_a);
-		if (disorder < 0.2)
+		if (disorder < 0.2 || ft_lstsize(stack_a->top) <= 5)
 			bubble_sort(stack_a);
 		else if (disorder >= 0.2 && disorder < 0.5)
 			range_sort_algo(stack_a, stack_b);
