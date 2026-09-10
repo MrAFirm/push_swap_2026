@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:52:43 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/08/31 22:22:24 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/10 18:30:36 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,17 @@ typedef struct	stack_b
 
 /* Algorithms */
 void	bubble_sort(t_stack_a *stack_a);
-void    block_sort(t_stack_a *stack_a);
+void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b);
+float	compute_disorder(t_stack_a *stack_a);
+void	custom_adapt_algo(char *argv, t_stack_a *stack_a, t_stack_b *stack_b);
 
 /* Operations */
 void	swap_a(t_stack_a *stack_a);
+void	swap_b(t_stack_b *stack_b);
 void	rotate_a(t_stack_a *stack_a);
+void	rotate_b(t_stack_b *stack_b);
 void	rrotate_a(t_stack_a *stack_a);
+void	push_a(t_stack_a *stack_a, t_stack_b *stack_b);
+void	push_b(t_stack_a *stack_a, t_stack_b *stack_b);
 
 #endif

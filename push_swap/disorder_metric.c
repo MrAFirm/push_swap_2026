@@ -1,18 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   disorder_metric.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/27 18:08:33 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/10 17:37:37 by likhye-y         ###   ########.fr       */
+/*   Created: 2026/09/10 17:38:21 by likhye-y          #+#    #+#             */
+/*   Updated: 2026/09/10 18:06:41 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
+float	compute_disorder(t_stack_a *stack_a)
+{
+	t_list	*head;
+	int		size;
+	int		mistakes;
+	int		total_pairs;
+	int		i;
+	t_list	*current;
+	t_list	*iter_node;
+	int		j;
+
+	head = stack_a->top;
+	size = (int)ft_lstsize(head);
+	mistakes = 0;
+	total_pairs = 0;
+	i = 0;
+	current = stack_a->top;
+	while (i < size - 1)
+	{
+		j = i + 1;
+		iter_node = current->next;
+		while (j < size)
+		{
+			total_pairs += 1;
+			if (current->content > iter_node->content)
+				mistakes += 1;
+			iter_node = iter_node->next;
+			j++;
+		}
+		current = current->next;
+		i++;
+	}
+	return ((float)mistakes / (float)total_pairs);
+}
+
 int main()
 {
 	t_stack_a	stack_a;
@@ -51,42 +85,6 @@ int main()
 		current = current->next;
 		c++;
 	}
-	// bubble_sort(&stack_a);
-	range_sort_algo(&stack_a, &stack_b);
-    
-	current = stack_a.top;
-	c = 0;
-	while (current)
-	{
-		printf("%d: %i\n", c, current->content);
-		current = current->next;
-		c++;
-	}
+
+	printf("%.1f", compute_disorder(&stack_a));
 }
-*/
-
-/*
-while ((unsigned int)i < ft_lstsize(stack_a.top))
-{
-		printf("%d: %d\n", i, arr[i]);
-		i++;
-	}
-	printf("Block Size: %d\n", block_size(&stack_a));
-	
-	current = head;
-	int	c = 0;
-	current = stack_a.top;
-	while (current)
-	{
-		printf("%d: %i\n", c, current->content);
-		current = current->next;
-		c++;
-	}
-
-	while ((unsigned int)i < ft_lstsize(head))
-	{
-		printf("Current: %d\nIndex: %d\n", stack_a->top->content, stack_a->top->index);
-		i++;
-		stack_a->top = stack_a->top->next;
-	}	
-*/

@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 22:15:32 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/10 16:07:14 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/10 17:37:54 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ static int	ft_sqrt(int nb)
 	return (i);
 }
 
+/*
 int main()
 {
 	t_stack_a	stack_a;
@@ -217,7 +218,7 @@ int main()
 	ft_lstadd_front(&head, new2);
 	ft_lstadd_front(&head, new);
 	stack_a.top = head;
-
+    
 	current = stack_a.top;
 	int	c = 0;
 	while (current)
@@ -228,7 +229,7 @@ int main()
 	}
 	// bubble_sort(&stack_a);
 	range_sort_algo(&stack_a, &stack_b);
-
+    
 	current = stack_a.top;
 	c = 0;
 	while (current)
@@ -237,29 +238,31 @@ int main()
 		current = current->next;
 		c++;
 	}
-
-	// while ((unsigned int)i < ft_lstsize(stack_a.top))
-	// {
-	// 	printf("%d: %d\n", i, arr[i]);
-	// 	i++;
-	// }
-	// printf("Block Size: %d\n", block_size(&stack_a));
-	
-	// current = head;
-	// int	c = 0;
-	// current = stack_a.top;
-	// while (current)
-	// {
-	// 	printf("%d: %i\n", c, current->content);
-	// 	current = current->next;
-	// 	c++;
-	// }
-
-	// while ((unsigned int)i < ft_lstsize(head))
-	// {
-	// 	printf("Current: %d\nIndex: %d\n", stack_a->top->content, stack_a->top->index);
-	// 	i++;
-	// 	stack_a->top = stack_a->top->next;
-	// }
-	
 }
+*/
+
+/*
+while ((unsigned int)i < ft_lstsize(stack_a.top))
+{
+		printf("%d: %d\n", i, arr[i]);
+		i++;
+	}
+	printf("Block Size: %d\n", block_size(&stack_a));
+	
+	current = head;
+	int	c = 0;
+	current = stack_a.top;
+	while (current)
+	{
+		printf("%d: %i\n", c, current->content);
+		current = current->next;
+		c++;
+	}
+
+	while ((unsigned int)i < ft_lstsize(head))
+	{
+		printf("Current: %d\nIndex: %d\n", stack_a->top->content, stack_a->top->index);
+		i++;
+		stack_a->top = stack_a->top->next;
+	}	
+*/

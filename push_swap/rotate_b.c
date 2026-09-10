@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*    adaptive_algo.c                                   :+:      :+:    :+:   */
+/*   rotate_b.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/27 16:37:43 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/10 18:31:06 by likhye-y         ###   ########.fr       */
+/*   Created: 2026/09/09 15:36:16 by likhye-y          #+#    #+#             */
+/*   Updated: 2026/09/10 14:16:51 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	custom_adapt_algo(char *argv, t_stack_a *stack_a, t_stack_b *stack_b)
+void	rotate_b(t_stack_b *stack_b)
 {
-	size_t	i;
-	float	disorder;
+	t_list	*current;
+	t_list	*next;
+	t_list	*lst;
 
-	i = 0;
-	disorder = 0.0;
-	if (argv[i] == "--adaptive")
-	{
-		disorder = compute_disorder(&stack_a);
-		if (disorder < 0.2)
-			bubble_sort(stack_a);
-		else if (disorder >= 0.2 && disorder < 0.5)
-			range_sort_algo(stack_a, stack_b);
-		else if (disorder >= 0.5)
-			radix_sort(stack_a);
-	}
+	if (!stack_b->top || !stack_b->top->next)
+		return ;
+	current = stack_b->top;
+	next = stack_b->top->next;
+	lst = ft_lstlast(stack_b->top);
+	lst->next = current;
+	current->next = NULL;
+	stack_b->top = next;
+	write(1, "rb\n", 3);
 }

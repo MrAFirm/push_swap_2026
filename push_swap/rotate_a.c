@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 21:41:04 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/08/28 17:25:29 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/10 14:15:34 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	rotate_a(t_stack_a *stack_a)
 	t_list	*next;
 	t_list	*lst;
 
+	if (!stack_a->top || !stack_a->top->next)
+		return ;
 	current = stack_a->top;
 	next = stack_a->top->next;
 	lst = ft_lstlast(stack_a->top);
