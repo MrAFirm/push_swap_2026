@@ -6,29 +6,40 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/10 17:38:21 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/10 18:06:41 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/14 17:49:30 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static float	logic(t_list *head, t_list *current, int mistakes, int total_pairs);
+
 float	compute_disorder(t_stack_a *stack_a)
 {
 	t_list	*head;
-	int		size;
 	int		mistakes;
 	int		total_pairs;
-	int		i;
 	t_list	*current;
-	t_list	*iter_node;
-	int		j;
+	float	result;
 
 	head = stack_a->top;
-	size = (int)ft_lstsize(head);
 	mistakes = 0;
 	total_pairs = 0;
-	i = 0;
 	current = stack_a->top;
+	result = logic(head, current, mistakes, total_pairs);
+	return (result);
+}
+
+static float	logic(t_list *head, t_list *current, int mistakes, int total_pairs)
+{
+	int		size;
+	int		i;
+	int		j;
+	t_list	*iter_node;
+
+	size = (int)ft_lstsize(head);
+	i = 0;
+	j = 0;
 	while (i < size - 1)
 	{
 		j = i + 1;
@@ -47,6 +58,7 @@ float	compute_disorder(t_stack_a *stack_a)
 	return ((float)mistakes / (float)total_pairs);
 }
 
+/*
 int main()
 {
 	t_stack_a	stack_a;
@@ -88,3 +100,4 @@ int main()
 
 	printf("%.1f", compute_disorder(&stack_a));
 }
+*/

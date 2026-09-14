@@ -6,73 +6,41 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 22:15:32 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/10 17:37:54 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/14 19:21:21 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b);
-static int	*coords_compress(t_stack_a *stack_a);
-static int	block_size(t_stack_a *stack_a);
-static int	ft_sqrt(int nb);
 
 void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b)
 {
-	t_list	*head;
 	int		size;
-	int		i;
 	int		range_start;
 	int		range_end;
-	int		iter;
 	int		blocksize;
 	int		*arr;
 
-	head = stack_a->top;
-	size = (int)ft_lstsize(head);
-	i = 0;
+	size = size_stack_a(stack_a, 0);
 	blocksize = block_size(stack_a);
-	arr = coords_compress(stack_a);
+	coords_compress(stack_a);
 	range_start = size - blocksize;
-	iter = range_start;
 	range_end = size - 1;
-
 	while (range_start >= 0)
 	{
-		while (iter <= range_end)
-		{
-			if (range_end == 0 && range_start == 0 && stack_a->top->index == 0 && !stack_a->top->next)
-			{
-				push_b(stack_a, stack_b);
-				iter++;
-			}
-			else
-			{
-				if (stack_a->top->index >= range_start && stack_a->top->index <= range_end)
-				{
-					push_b(stack_a, stack_b);
-					iter++;
-				}
-				else
-					rotate_a(stack_a);
-			}
-		}
+		push_range(stack_a, stack_b, range_start, range_end);
 		if (stack_b->top)
 			de_bubble_sort(stack_a, stack_b);
+		arr = next_range_start(range_start, range_end, blocksize);
 		if (range_start == 0)
 			return ;
 		if (range_start == 0 && range_end == 0)
 			return ;
-		range_start -= blocksize;
-		if (range_start < 0)
-			range_start = 0;
-		iter = range_start;
-		range_end -= blocksize;
-		if (range_end < 0)
-			range_end = 0;
+		range_start = arr[0];
+		range_end = arr[1];
 	}
 }
-
 
 static void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b)
 {
@@ -82,7 +50,6 @@ static void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b)
 
 	i = 0;
 	head = stack_b->top;
-
 	while (i < ft_lstsize(head))
 	{
 		j = 0;
@@ -104,6 +71,38 @@ static void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b)
 		push_a(stack_a, stack_b);
 }
 
+int	block_size(t_stack_a *stack_a)
+{
+	int	total_size;
+	int	blocksize;
+
+	total_size = ft_lstsize(stack_a->top);
+	blocksize = ft_sqrt(total_size);
+	return (blocksize);
+}
+
+/*
+k ≈ √n (Check notes) with custom sqrt function.
+O(n√n)
+*/
+
+int	ft_sqrt(int nb)
+{
+	int	i;
+
+	i = 1;
+	if (nb <= 0)
+		return (0);
+	while (i <= nb / i)
+	{
+		if (i * i == nb)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+/*
 static int	*coords_compress(t_stack_a *stack_a)
 {
 	t_list			*head;
@@ -146,7 +145,7 @@ static int	*coords_compress(t_stack_a *stack_a)
 		winner[manual_i] = smallest;
 		stack_a->top = head;
 		while (stack_a->top->content != smallest)
-			stack_a->top = stack_a->top->next;
+		stack_a->top = stack_a->top->next;
 		stack_a->top->index = manual_i;
 		manual_i++;
 		i++;
@@ -154,39 +153,8 @@ static int	*coords_compress(t_stack_a *stack_a)
 	stack_a->top = head;
 	return (winner);
 }
-
-//O(n^2)
-
-static int	block_size(t_stack_a *stack_a)
-{
-	int	total_size;
-	int	blocksize;
-
-	total_size = ft_lstsize(stack_a->top);
-	blocksize = ft_sqrt(total_size);
-	return (blocksize);
-}
-
-/*
-k ≈ √n (Check notes) with custom sqrt function.
-O(n√n)
+O(n^2)
 */
-
-static int	ft_sqrt(int nb)
-{
-	int	i;
-
-	i = 1;
-	if (nb <= 0)
-		return (0);
-	while (i <= nb / i)
-	{
-		if (i * i == nb)
-			return (i);
-		i++;
-	}
-	return (i);
-}
 
 /*
 int main()
@@ -198,7 +166,7 @@ int main()
 	t_list	*current;
 	t_list	*new = ft_lstnew(2);
 	t_list	*new2 = ft_lstnew(3);
-	t_list	*new3 = ft_lstnew(1);
+	t_list	*new3 = ft_lstnew(10);
 	t_list	*new4 = ft_lstnew(4);
 	t_list	*new5 = ft_lstnew(5);
 	t_list	*new6 = ft_lstnew(9);

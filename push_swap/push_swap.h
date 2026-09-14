@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:52:43 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/10 18:30:36 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/14 19:14:36 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,22 @@ typedef struct	stack_b
 	struct stack_a	*push_num;
 }	t_stack_b;
 
+/* Blocksize calc */
+int	block_size(t_stack_a *stack_a);
+int	ft_sqrt(int nb);
+
 /* Algorithms */
 void	bubble_sort(t_stack_a *stack_a);
 void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b);
 float	compute_disorder(t_stack_a *stack_a);
 void	custom_adapt_algo(char *argv, t_stack_a *stack_a, t_stack_b *stack_b);
+
+/* Algo Utils */
+void	push_range(t_stack_a *a, t_stack_b *b, int range_start, int range_end);
+int		*next_range_start(int range_start, int range_end, int blocksize);
+int		size_stack_a(t_stack_a *stack_a, int size);
+void	check_smallest(t_stack_a *stack_a, t_list *head, int manual_i, int *winner);
+void	coords_compress(t_stack_a *stack_a);
 
 /* Operations */
 void	swap_a(t_stack_a *stack_a);
