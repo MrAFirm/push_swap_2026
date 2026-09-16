@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 17:50:57 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/14 19:18:10 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/16 16:49:53 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	check_smallest(t_stack_a *stack_a, t_list *head, int manual_i, int *winner)
 			k++;
 		}
 		if (match_flag == 0 && smallest > stack_a->top->content)
-				smallest = stack_a->top->content;
+			smallest = stack_a->top->content;
 		stack_a->top = stack_a->top->next;
 	}
 	winner[manual_i] = smallest;

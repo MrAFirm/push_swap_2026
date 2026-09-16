@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 22:15:32 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/14 19:21:21 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/16 16:52:17 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b)
 		push_range(stack_a, stack_b, range_start, range_end);
 		if (stack_b->top)
 			de_bubble_sort(stack_a, stack_b);
-		arr = next_range_start(range_start, range_end, blocksize);
 		if (range_start == 0)
 			return ;
 		if (range_start == 0 && range_end == 0)
 			return ;
+		arr = next_range_start(range_start, range_end, blocksize);
 		range_start = arr[0];
 		range_end = arr[1];
 	}
@@ -50,10 +50,10 @@ static void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b)
 
 	i = 0;
 	head = stack_b->top;
-	while (i < ft_lstsize(head))
+	while (i < ft_lstsize(stack_b->top))
 	{
 		j = 0;
-		while (j < ft_lstsize(head) - i - 1)
+		while (j < ft_lstsize(stack_b->top) - i - 1)
 		{
 			if (stack_b->top->content < stack_b->top->next->content)
 				swap_b(stack_b);

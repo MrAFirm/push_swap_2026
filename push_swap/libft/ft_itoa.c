@@ -5,135 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/04 20:13:23 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/08/21 23:43:20 by likhye-y         ###   ########.fr       */
+/*   Created: 2026/07/31 10:47:57 by amlee             #+#    #+#             */
+/*   Updated: 2026/09/14 21:27:48 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*handle_min(char *arr);
-static char		*negative_digit(int n, size_t count, char *arr);
-static char		*positive_digit(int n, size_t count, char *arr);
-static size_t	malloc_len_count(size_t count, int n);
+static int	ft_nbrlen(int nbr)
+{
+	int	i;
+
+	i = 0;
+	if (nbr <= 0)
+		i++;
+	while (nbr != 0)
+	{
+		nbr /= 10;
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_itoa(int n)
 {
-	size_t	count;
-	char	*arr;
+	int		len;
+	long	nbr;
+	char	*ans;
 
-	count = 0;
-	arr = NULL;
-	if (n == -2147483648)
-	{
-		arr = malloc(sizeof(char) * 11 + 1);
-		if (arr == NULL)
-			return (NULL);
-		arr = handle_min(arr);
-		return (arr);
-	}
-	count = malloc_len_count(count, n);
-	if (n < 0)
-	{
-		arr = negative_digit(n, count, arr);
-		return (arr);
-	}
-	else if (n >= 0)
-	{
-		arr = positive_digit(n, count, arr);
-		return (arr);
-	}
-	return (NULL);
-}
-
-static char	*handle_min(char *arr)
-{
-	arr[0] = '-';
-	arr[1] = '2';
-	arr[2] = '1';
-	arr[3] = '4';
-	arr[4] = '7';
-	arr[5] = '4';
-	arr[6] = '8';
-	arr[7] = '3';
-	arr[8] = '6';
-	arr[9] = '4';
-	arr[10] = '8';
-	arr[11] = '\0';
-	return (arr);
-}
-
-static char	*negative_digit(int n, size_t count, char *arr)
-{
-	n = -n;
-	count = 1 + count + 1;
-	arr = malloc(sizeof(char) * count);
-	if (arr == NULL)
+	nbr = n;
+	len = ft_nbrlen(nbr);
+	ans = malloc(sizeof(char) * (len + 1));
+	if (!ans)
 		return (NULL);
-	arr[0] = '-';
-	count = count - 1;
-	arr[count] = '\0';
-	count = count - 1;
-	while (n >= 10 && count >= 1)
+	ans[len] = '\0';
+	if (nbr == 0)
+		ans[0] = '0';
+	if (nbr < 0)
 	{
-		arr[count] = (n % 10) + '0';
-		n = n / 10;
-		count--;
+		ans[0] = '-';
+		nbr = -nbr;
 	}
-	if (n < 10 && count >= 1)
+	while (nbr > 0)
 	{
-		arr[count] = n + '0';
-		count--;
+		ans[--len] = (nbr % 10) + '0';
+		nbr /= 10;
 	}
-	return (arr);
+	return (ans);
 }
-
-static char	*positive_digit(int n, size_t count, char *arr)
-{
-	count = count + 1;
-	arr = malloc(sizeof(char) * count);
-	if (arr == NULL)
-		return (NULL);
-	count = count - 1;
-	arr[count] = '\0';
-	count = count - 1;
-	while (n >= 10 && count >= 0)
-	{
-		arr[count] = (n % 10) + '0';
-		n = n / 10;
-		count--;
-	}
-	if (n < 10 && count >= 0)
-	{
-		arr[count] = n + '0';
-		count--;
-	}
-	return (arr);
-}
-
-static size_t	malloc_len_count(size_t count, int n)
-{
-	int	nb;
-
-	nb = n;
-	if (nb < 0)
-		nb = -nb;
-	while (nb >= 10)
-	{
-		nb = nb / 10;
-		count++;
-	}
-	if (nb < 10)
-		count++;
-	return (count);
-}
-
 /*
-int main()
+#include <stdio.h>
+int	main(void)
 {
-	char	*arr;
-	
-	arr = ft_itoa(-0);
-	printf("%s\n", arr);
+	int		nbr = -2147483648;
+	char	*ans = ft_itoa(nbr);
+
+	if (ans)
+	{
+		printf("%s\n", ans);
+		free(ans);
+	}
+	return (0);
 }
 */
