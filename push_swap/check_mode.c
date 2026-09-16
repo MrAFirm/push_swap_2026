@@ -14,12 +14,13 @@
 
 int	check_mode(char **av)
 {
-	// if (ft_strncmp(*av[1], "--bench", 8) == 0)
-	// //ft_bench
-	// else if (ft_strncmp(*av[1], "--adaptive", 11) == 0
-	// 	|| ft_strncmp(*av[2], "--adaptive", 11) == 0)
-	// //ft_adapt
-	if (ft_strncmp(av[1], "--simple", 9) == 0
+	if (ft_strncmp(av[1], "--bench", 8) == 0)
+	//ft_bench
+		return (0); // 0 for bench
+	else if (ft_strncmp(av[1], "--adaptive", 11) == 0
+		|| ft_strncmp(av[2], "--adaptive", 11) == 0)
+		return (4);
+	else if (ft_strncmp(av[1], "--simple", 9) == 0
 		|| ft_strncmp(av[2], "--simple", 9) == 0)
 		return (1);
 	else if (ft_strncmp(av[1], "--medium", 9) == 0
@@ -29,7 +30,7 @@ int	check_mode(char **av)
 		|| ft_strncmp(av[2], "--complex", 10) == 0)
 		return (3);
 	//ft_adapt
-	return (-1); //test
+	return (4);
 }
 
 void	algo_select(char **av, t_list *a)
@@ -38,23 +39,19 @@ void	algo_select(char **av, t_list *a)
 	t_stack_b	stack_b;
 	t_list		*b;
 
+	stack_a.top = a;
+	stack_b.top = NULL;
 	if (check_mode(av) == 1)
-	{
-		stack_a.top = a;
 		bubble_sort(&stack_a);
-		ft_lstclear(&a, del);
-	}
 	else if (check_mode(av) == 2)
-	{
-		stack_a.top = a;
-		stack_b.top = NULL;
 		range_sort_algo(&stack_a, &stack_b);
-		ft_lstclear(&a, del);
-	}
 	else if (check_mode(av) == 3)
 	{
+		a = stack_a.top;
 		index_stack(a);
 		radix(&a, &b);
-		ft_lstclear(&a, del);
 	}
+	else if (check_mode(av) == 4)
+		custom_adapt_algo(&stack_a, &stack_b);
+	ft_lstclear(&a, del);
 }

@@ -24,7 +24,7 @@ static void	rules_print_one(t_bench *bench)
 	ft_putnbr_fd(bench->pa, 2);
 	ft_putstr_fd("pb:  ", 2);
 	ft_putnbr_fd(bench->pb, 2);
-	write(1, "\n", 2);
+	write(2, "\n", 1);
 }
 
 static void	rules_print_two(t_bench *bench)
@@ -41,7 +41,7 @@ static void	rules_print_two(t_bench *bench)
 	ft_putnbr_fd(bench->rrb, 2);
 	ft_putstr_fd("rrr: ", 2);
 	ft_putnbr_fd(bench->rrr, 2);
-	write(1, "\n", 2);
+	write(2, "\n", 1);
 }
 
 void	print_bench(t_bench *bench)
@@ -62,7 +62,7 @@ void	print_bench(t_bench *bench)
 		ft_putstr_fd("Adaptive / O(n\\sqrt{n})\n", 2);
 	ft_putstr_fd("[bench] total_ops:  ", 2);
 	ft_putnbr_fd(bench->total_ops, 2);
-	write(1, "\n", 2);
+	write(2, "\n", 1);
 	rules_print_one(bench);
 	rules_print_two(bench);
 }
