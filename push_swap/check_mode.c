@@ -16,7 +16,7 @@ int	check_mode(char **av)
 {
 	if (ft_strncmp(av[1], "--bench", 8) == 0)
 	//ft_bench
-		return (0); // 0 for bench
+		return (0);
 	else if (ft_strncmp(av[1], "--adaptive", 11) == 0
 		|| ft_strncmp(av[2], "--adaptive", 11) == 0)
 		return (4);
@@ -29,7 +29,6 @@ int	check_mode(char **av)
 	else if (ft_strncmp(av[1], "--complex", 10) == 0
 		|| ft_strncmp(av[2], "--complex", 10) == 0)
 		return (3);
-	//ft_adapt
 	return (4);
 }
 
@@ -42,7 +41,7 @@ void	algo_select(char **av, t_list *a)
 	stack_a.top = a;
 	stack_b.top = NULL;
 	if (check_mode(av) == 1)
-		bubble_sort(&stack_a);
+		range_sort_algo_sim(&stack_a, &stack_b);
 	else if (check_mode(av) == 2)
 		range_sort_algo(&stack_a, &stack_b);
 	else if (check_mode(av) == 3)

@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:52:43 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/16 21:46:50 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/22 18:52:03 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-/*
+
 # include <stdio.h>
-*/
+
 
 typedef struct	stack_a
 {
@@ -62,20 +62,21 @@ void	rotate_b(t_stack_b *stack_b);
 void	push_a(t_stack_a *stack_a, t_stack_b *stack_b);
 void	push_b(t_stack_a *stack_a, t_stack_b *stack_b);
 
-/* Simple Algo n² */
-void	bubble_sort(t_stack_a *stack_a);
-
-/* Medium Algo n√n */
-void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b);
-float	compute_disorder(t_stack_a *stack_a);
-void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b);
-
 /* Medium Algo Utils */
 void	push_range(t_stack_a *a, t_stack_b *b, int range_start, int range_end);
 int		*next_range_start(int range_start, int range_end, int blocksize);
 int		size_stack_a(t_stack_a *stack_a, int size);
 void	check_smallest(t_stack_a *stack_a, t_list *head, int manual_i, int *winner);
 void	coords_compress(t_stack_a *stack_a);
+
+/* Simple Algo n² */
+void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b);
+void	range_sort_algo_sim(t_stack_a *stack_a, t_stack_b *stack_b);
+
+/* Medium Algo n√n */
+void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b);
+float	compute_disorder(t_stack_a *stack_a);
+void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b);
 
 /* Parsing Util */
 void	algo_select(char **av, t_list *a);

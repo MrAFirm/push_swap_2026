@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 17:50:57 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/16 16:49:53 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/22 21:22:40 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	push_range(t_stack_a *a, t_stack_b *b, int range_start, int range_end)
 				push_b(a, b);
 				iter++;
 			}
-			else
+			else if (!(a->top->index >= range_start && a->top->index <= range_end))
 				rotate_a(a);
 		}
 	}

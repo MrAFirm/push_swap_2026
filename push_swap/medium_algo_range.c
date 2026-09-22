@@ -6,13 +6,11 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 22:15:32 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/16 16:52:17 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/22 18:55:07 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b);
 
 void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b)
 {
@@ -42,21 +40,24 @@ void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b)
 	}
 }
 
-static void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b)
+void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b)
 {
 	size_t	i;
 	size_t	j;
-	t_list	*head;
+	size_t	count;
 
 	i = 0;
-	head = stack_b->top;
 	while (i < ft_lstsize(stack_b->top))
 	{
 		j = 0;
+		count = 0;
 		while (j < ft_lstsize(stack_b->top) - i - 1)
 		{
 			if (stack_b->top->content < stack_b->top->next->content)
+			{
 				swap_b(stack_b);
+				count = 1;
+			}
 			rotate_b(stack_b);
 			j++;
 		}
@@ -65,6 +66,8 @@ static void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b)
 			rotate_b(stack_b);
 			j++;
 		}
+		if (count == 0)
+			break ;
 		i++;
 	}
 	while (stack_b->top)
