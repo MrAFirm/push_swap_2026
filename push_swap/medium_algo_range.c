@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 22:15:32 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/22 18:55:07 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/24 21:42:14 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,66 @@ void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b)
 		arr = next_range_start(range_start, range_end, blocksize);
 		range_start = arr[0];
 		range_end = arr[1];
+		free(arr);
 	}
 }
 
+int	find_max(t_stack_b *stack_b)
+{
+	t_list	*current;
+	size_t	i;
+	size_t	max_idx;
+	size_t	max_pos;
+
+	current = stack_b->top;
+	i = 0;
+	while (current)
+	{
+		if (current->next)
+			break ;
+		if (current->index > current->next->index)
+		{
+			max_idx = current->index;
+			max_pos = i;
+		}
+		current = current->next;
+		i++;
+	}
+	return (max_pos);
+}
+
+void	drain_b_to_a(t_stack_a *stack_a, t_stack_b *stack_b)
+{
+	int	size;
+	int	max_pos;
+	int	i;
+
+	while (stack_b->top)
+	{
+		size = (int)ft_lstsize(stack_b->top);
+		max_pos = find_max(stack_b);
+		i = 0;
+		if (max_pos <= size / 2)
+		{
+			while (i < max_pos)
+			{
+				rotate_b(stack_b);
+				i++;
+			}
+		}
+		else if (max_pos >= size / 2)
+		{
+			while (i < size - max_pos)
+			{
+				rrotate_b(stack_b);
+				i++;
+			}
+		}
+		push_a(stack_a, stack_b);
+	}
+}
+
+/*
 void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b)
 {
 	size_t	i;
@@ -73,6 +130,7 @@ void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b)
 	while (stack_b->top)
 		push_a(stack_a, stack_b);
 }
+*/
 
 int	block_size(t_stack_a *stack_a)
 {

@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I. -Ilibft
 SRCS = main.c radix.c rules_comp.c rules_med_sim_1.c rules_med_sim_2.c \
 extra_rules.c parsing.c adaptive_algo.c check_mode.c disorder_metric.c \
-bench.c medium_algo_utils.c medium_algo_range.c simple_algo_bubble.c \
+bench.c medium_algo_utils.c medium_algo_range.c simple_algo_bubble.c sort_3_5.c\
 
 LIBFT_DIR = libft
 LIBFT_SRC = $(LIBFT_DIR)/libft.a

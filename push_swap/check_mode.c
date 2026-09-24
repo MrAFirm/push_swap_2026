@@ -47,6 +47,7 @@ void	algo_select(char **av, t_list *a)
 	else if (check_mode(av) == 3)
 	{
 		a = stack_a.top;
+		b = stack_b.top;
 		index_stack(a);
 		radix(&a, &b);
 	}

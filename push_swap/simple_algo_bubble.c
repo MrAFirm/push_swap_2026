@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:37:37 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/22 18:55:51 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/24 17:27:23 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,20 @@ void	range_sort_algo_sim(t_stack_a *stack_a, t_stack_b *stack_b)
 	int		range_end;
 	int		blocksize;
 	int		*arr;
+	float	disorder;
 
 	size = size_stack_a(stack_a, 0);
-	blocksize = 7;
+	disorder = compute_disorder(stack_a);
+	blocksize = 9;
+	if (disorder < 0.2)
+		blocksize = 7;
+	if (disorder >= 0.45 && disorder <= 0.49)
+		disorder = 0.4;
+	if (disorder >= 0.2 && disorder < 0.5)
+		blocksize = 9;
+	if (disorder >= 0.5)
+		blocksize = 10;
+	printf("%.2f, %d", disorder, blocksize);
 	coords_compress(stack_a);
 	range_start = size - blocksize;
 	if (range_start < 0)
