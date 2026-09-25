@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:37:37 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/24 17:27:23 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/25 17:15:20 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ void	range_sort_algo_sim(t_stack_a *stack_a, t_stack_b *stack_b)
 
 	size = size_stack_a(stack_a, 0);
 	disorder = compute_disorder(stack_a);
-	blocksize = 9;
-	if (disorder < 0.2)
-		blocksize = 7;
-	if (disorder >= 0.45 && disorder <= 0.49)
-		disorder = 0.4;
-	if (disorder >= 0.2 && disorder < 0.5)
-		blocksize = 9;
-	if (disorder >= 0.5)
-		blocksize = 10;
+	blocksize = 12;
+	// if (disorder < 0.2)
+	// 	blocksize = 7;
+	// if (disorder >= 0.45 && disorder <= 0.49)
+	// 	disorder = 0.4;
+	// if (disorder >= 0.2 && disorder < 0.5)
+	// 	blocksize = 9;
+	// if (disorder >= 0.5)
+	// 	blocksize = 10;
 	printf("%.2f, %d", disorder, blocksize);
 	coords_compress(stack_a);
 	range_start = size - blocksize;
@@ -42,7 +42,7 @@ void	range_sort_algo_sim(t_stack_a *stack_a, t_stack_b *stack_b)
 	{
 		push_range(stack_a, stack_b, range_start, range_end);
 		if (stack_b->top)
-			de_bubble_sort(stack_a, stack_b);
+			drain_b_to_a(stack_a, stack_b);
 		if (range_start == 0)
 			return ;
 		if (range_start == 0 && range_end == 0)

@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:52:43 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/24 18:53:51 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/25 15:38:12 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	rotate_b(t_stack_b *stack_b);
 void	push_a(t_stack_a *stack_a, t_stack_b *stack_b);
 void	push_b(t_stack_a *stack_a, t_stack_b *stack_b);
 
-void butterfly_push(t_stack_a *a, t_stack_b *b, int total_size, int blocksize);
-
 /* Medium Algo Utils */
 void	push_range(t_stack_a *a, t_stack_b *b, int range_start, int range_end);
 int		*next_range_start(int range_start, int range_end, int blocksize);
@@ -76,6 +74,8 @@ void    sort_3(t_stack_a *stack_a);
 void	sort_5(t_stack_a *stack_a, t_stack_b *stack_b);
 
 /* Simple and Medium Util */
+int		find_max(t_stack_b *stack_b);
+void	drain_b_to_a(t_stack_a *stack_a, t_stack_b *stack_b);
 void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b);
 
 /* Simple Algo n² */

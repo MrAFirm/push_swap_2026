@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 21:32:13 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/16 21:36:23 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/25 16:37:43 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	rrotate_b(t_stack_b *stack_b)
 	current = last;
 	current->next = stack_b->top;
 	stack_b->top = current;
-	write(1, "rra\n", 4);
+	write(1, "rrb\n", 4);
 }
 
 void	swap_s(t_stack_a *stack_a, t_stack_b *stack_b)

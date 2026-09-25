@@ -6,7 +6,7 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 22:15:32 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/24 21:42:14 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/25 16:26:58 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b)
 	{
 		push_range(stack_a, stack_b, range_start, range_end);
 		if (stack_b->top)
-			de_bubble_sort(stack_a, stack_b);
+			drain_b_to_a(stack_a, stack_b);
 		if (range_start == 0)
 			return ;
 		if (range_start == 0 && range_end == 0)
@@ -50,11 +50,11 @@ int	find_max(t_stack_b *stack_b)
 
 	current = stack_b->top;
 	i = 0;
+	max_pos = i;
+	max_idx = current->index;
 	while (current)
 	{
-		if (current->next)
-			break ;
-		if (current->index > current->next->index)
+		if (current->index > (int)max_idx)
 		{
 			max_idx = current->index;
 			max_pos = i;
@@ -84,7 +84,7 @@ void	drain_b_to_a(t_stack_a *stack_a, t_stack_b *stack_b)
 				i++;
 			}
 		}
-		else if (max_pos >= size / 2)
+		else if (max_pos > size / 2)
 		{
 			while (i < size - max_pos)
 			{
