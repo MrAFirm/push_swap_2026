@@ -12,46 +12,75 @@
 
 #include "push_swap.h"
 
-int	check_mode(char **av)
+static int	check_mode(char **av, t_bench *bench)
 {
-	if (ft_strncmp(av[1], "--bench", 8) == 0)
-	//ft_bench
-		return (0);
-	else if (ft_strncmp(av[1], "--adaptive", 11) == 0
+	if (ft_strncmp(av[1], "--bench", 8) == 0
+		|| ft_strncmp(av[2], "--bench", 8) == 0)
+		bench->enabled = 1;
+	if (ft_strncmp(av[1], "--adaptive", 11) == 0
 		|| ft_strncmp(av[2], "--adaptive", 11) == 0)
 		return (4);
 	else if (ft_strncmp(av[1], "--simple", 9) == 0
 		|| ft_strncmp(av[2], "--simple", 9) == 0)
-		return (1);
+		return (bench->strategy = 1, 1);
 	else if (ft_strncmp(av[1], "--medium", 9) == 0
 		|| ft_strncmp(av[2], "--medium", 9) == 0)
-		return (2);
+		return (bench->strategy = 2, 2);
 	else if (ft_strncmp(av[1], "--complex", 10) == 0
 		|| ft_strncmp(av[2], "--complex", 10) == 0)
-		return (3);
+		return (bench->strategy = 3, 3);
 	return (4);
+}
+
+static void	algo_help(char **av, t_stack_a stack_a, t_bench *bench, t_list *a)
+{
+	t_stack_b	stack_b;
+	t_list		*b;
+
+	stack_b.top = NULL;
+	stack_b.value = malloc(sizeof(*stack_b.value));
+	if (!stack_b.value)
+		return ;
+	stack_b.value->flag = 1;
+	if (check_mode(av, bench) == 1)
+		bubble_sort(&stack_a, bench);
+	else if (check_mode(av, bench) == 2)
+		range_sort_algo(&stack_a, &stack_b, bench);
+	else if (check_mode(av, bench) == 3)
+	{
+		a = stack_a.top;
+		b = stack_b.top;
+		index_stack(a);
+		radix(&a, &b, bench);
+	}
+	else if (check_mode(av, bench) == 4)
+		custom_adapt_algo(&stack_a, &stack_b, bench);
+	if (stack_a.value)
+		free(stack_a.value);
+	if (stack_b.value)
+		free(stack_b.value);
+	ft_lstclear(&a, del);
 }
 
 void	algo_select(char **av, t_list *a)
 {
 	t_stack_a	stack_a;
-	t_stack_b	stack_b;
-	t_list		*b;
+	t_bench		*bench;
+	float		disorder;
 
+	disorder = 0.0;
 	stack_a.top = a;
-	stack_b.top = NULL;
-	if (check_mode(av) == 1)
-		range_sort_algo_sim(&stack_a, &stack_b);
-	else if (check_mode(av) == 2)
-		range_sort_algo(&stack_a, &stack_b);
-	else if (check_mode(av) == 3)
-	{
-		a = stack_a.top;
-		b = stack_b.top;
-		index_stack(a);
-		radix(&a, &b);
-	}
-	else if (check_mode(av) == 4)
-		custom_adapt_algo(&stack_a, &stack_b);
-	ft_lstclear(&a, del);
+	stack_a.value = malloc(sizeof(*stack_a.value));
+	if (!stack_a.value)
+		return ;
+	stack_a.value->flag = 1;
+	disorder = compute_disorder(&stack_a);
+	if (disorder == 0)
+		return ;
+	bench = malloc(sizeof(t_bench));
+	if (!bench)
+		return ;
+	init_bench(bench, &stack_a);
+	algo_help(av, stack_a, bench, a);
+	print_bench(bench);
 }

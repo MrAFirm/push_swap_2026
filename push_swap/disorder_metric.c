@@ -12,25 +12,25 @@
 
 #include "push_swap.h"
 
-static float	logic(t_list *head, t_list *current, int mistakes, int total_pairs);
+static float	logic(t_list *head, t_list *c, int mistakes, int total_pairs);
 
 float	compute_disorder(t_stack_a *stack_a)
 {
 	t_list	*head;
 	int		mistakes;
 	int		total_pairs;
-	t_list	*current;
+	t_list	*c;
 	float	result;
 
 	head = stack_a->top;
 	mistakes = 0;
 	total_pairs = 0;
-	current = stack_a->top;
-	result = logic(head, current, mistakes, total_pairs);
+	c = stack_a->top;
+	result = logic(head, c, mistakes, total_pairs);
 	return (result);
 }
 
-static float	logic(t_list *head, t_list *current, int mistakes, int total_pairs)
+static float	logic(t_list *head, t_list *c, int mistakes, int total_pairs)
 {
 	int		size;
 	int		i;
@@ -43,61 +43,58 @@ static float	logic(t_list *head, t_list *current, int mistakes, int total_pairs)
 	while (i < size - 1)
 	{
 		j = i + 1;
-		iter_node = current->next;
+		iter_node = c->next;
 		while (j < size)
 		{
 			total_pairs += 1;
-			if (current->content > iter_node->content)
+			if (c->content > iter_node->content)
 				mistakes += 1;
 			iter_node = iter_node->next;
 			j++;
 		}
-		current = current->next;
+		c = c->next;
 		i++;
 	}
 	return ((float)mistakes / (float)total_pairs);
 }
 
-/*
-int main()
+int	get_mult(void)
 {
-	t_stack_a	stack_a;
-	t_stack_b	stack_b;
-	stack_b.top = NULL;
-	t_list	*head = NULL;
-	t_list	*current;
-	t_list	*new = ft_lstnew(2);
-	t_list	*new2 = ft_lstnew(3);
-	t_list	*new3 = ft_lstnew(1);
-	t_list	*new4 = ft_lstnew(4);
-	t_list	*new5 = ft_lstnew(5);
-	t_list	*new6 = ft_lstnew(9);
-	t_list	*new7 = ft_lstnew(15);
-	t_list	*new8 = ft_lstnew(22);
-	t_list	*new9 = ft_lstnew(109);
-	t_list	*new10 = ft_lstnew(8);
-	
-	ft_lstadd_front(&head, new10);
-	ft_lstadd_front(&head, new9);
-	ft_lstadd_front(&head, new8);
-	ft_lstadd_front(&head, new7);
-	ft_lstadd_front(&head, new6);
-	ft_lstadd_front(&head, new5);
-	ft_lstadd_front(&head, new4);
-	ft_lstadd_front(&head, new3);
-	ft_lstadd_front(&head, new2);
-	ft_lstadd_front(&head, new);
-	stack_a.top = head;
-    
-	current = stack_a.top;
-	int	c = 0;
-	while (current)
-	{
-		printf("%d: %i\n", c, current->content);
-		current = current->next;
-		c++;
-	}
+	int	mult;
+	int	i;
 
-	printf("%.1f", compute_disorder(&stack_a));
+	i = 2;
+	mult = 1;
+	while (i-- > 0)
+		mult *= 10;
+	return (mult);
 }
-*/
+
+static char	*join_free(char *s1, char *s2)
+{
+	char	*ans;
+
+	if (!s1 || !s2)
+		return (free(s1), free(s2), NULL);
+	ans = ft_strjoin(s1, s2);
+	free(s1);
+	free(s2);
+	return (ans);
+}
+
+char	*ft_ftoa(float f, int mult)
+{
+	char	*ans;
+	char	*dec;
+	int		frac;
+
+	frac = (int)((f - (int)f) * mult);
+	if (frac < 0)
+		frac = -frac;
+	dec = ft_itoa(frac);
+	if (!dec)
+		return (NULL);
+	ans = join_free(ft_itoa((int)f), ft_strjoin(".", dec));
+	free(dec);
+	return (ans);
+}

@@ -6,13 +6,13 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 21:32:13 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/25 16:37:43 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/30 00:54:18 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rrotate_a(t_stack_a *stack_a)
+void	rrotate_a(t_stack_a *stack_a, t_bench *bench)
 {
 	t_list	*current;
 	t_list	*prev;
@@ -28,10 +28,13 @@ void	rrotate_a(t_stack_a *stack_a)
 	current = last;
 	current->next = stack_a->top;
 	stack_a->top = current;
-	write(1, "rra\n", 4);
+	if (stack_a->value->flag == 1)
+		write(1, "rra\n", 4);
+	bench->rra += 1;
+	bench->total_ops += 1;
 }
 
-void	rrotate_b(t_stack_b *stack_b)
+void	rrotate_b(t_stack_b *stack_b, t_bench *bench)
 {
 	t_list	*current;
 	t_list	*prev;
@@ -47,26 +50,38 @@ void	rrotate_b(t_stack_b *stack_b)
 	current = last;
 	current->next = stack_b->top;
 	stack_b->top = current;
-	write(1, "rrb\n", 4);
+	if (stack_b->value->flag == 1)
+		write(1, "rrb\n", 4);
+	bench->rrb += 1;
+	bench->total_ops += 1;
 }
 
-void	swap_s(t_stack_a *stack_a, t_stack_b *stack_b)
+void	swap_s(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench)
 {
-	swap_a(stack_a);
-	swap_b(stack_b);
-	write(1, "ss\n", 3);
+	swap_a(stack_a, bench);
+	swap_b(stack_b, bench);
+	if (stack_a->value->flag == 1)
+		write(1, "ss\n", 3);
+	bench->ss += 1;
+	bench->total_ops += 1;
 }
 
-void	rotate_r(t_stack_a *stack_a, t_stack_b *stack_b)
+void	rotate_r(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench)
 {
-	rotate_a(stack_a);
-	rotate_b(stack_b);
-	write(1, "rr\n", 3);
+	rotate_a(stack_a, bench);
+	rotate_b(stack_b, bench);
+	if (stack_a->value->flag == 1)
+		write(1, "rr\n", 3);
+	bench->rr += 1;
+	bench->total_ops += 1;
 }
 
-void	rrotate_r(t_stack_a *stack_a, t_stack_b *stack_b)
+void	rrotate_r(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench)
 {
-	rrotate_a(stack_a);
-	rrotate_b(stack_b);
-	write(1, "rrr\n", 4);
+	rrotate_a(stack_a, bench);
+	rrotate_b(stack_b, bench);
+	if (stack_a->value->flag == 1)
+		write(1, "rrr\n", 4);
+	bench->rrr += 1;
+	bench->total_ops += 1;
 }

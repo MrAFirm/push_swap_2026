@@ -1,40 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   adaptive_algo.c                                    :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/27 16:37:43 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/24 18:17:47 by likhye-y         ###   ########.fr       */
+/*   Created: 2026/09/29 15:36:49 by amlee             #+#    #+#             */
+/*   Updated: 2026/09/30 01:27:13 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdlib.h>
+#include <unistd.h>
 
-void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *be)
+void	del(int content)
+{
+	(void)content;
+}
+
+void	check(t_stack_a *stack_a)
 {
 	float	disorder;
-	t_list	*a;
-	t_list	*b;
-
+	
 	disorder = 0.0;
-	a = stack_a->top;
-	b = stack_b->top;
 	disorder = compute_disorder(stack_a);
 	if (disorder == 0)
-		return ;
-	else if (ft_lstsize(stack_a->top) == 3)
-		sort_3(stack_a, be);
-	else if (ft_lstsize(stack_a->top) == 5)
-		sort_5(stack_a, stack_b, be);
-	else if (disorder < 0.2)
-		bubble_sort(stack_a, be);
-	else if (disorder >= 0.2 && disorder < 0.5)
-		range_sort_algo(stack_a, stack_b, be);
-	else if (disorder >= 0.5)
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
+}
+
+int	main(int ac, char **av)
+{
+	t_list		*a;
+	t_stack_a	stack_a;
+
+	if (ac <= 1)
+		return (0);
+	a = NULL;
+	stack_a.top = a;
+	if (!parsing_create(ac, av, &a) || !a)
 	{
-		index_stack(a);
-		radix(&a, &b, be);
+		write(2, "Error\n", 6);
+		return (1);
 	}
+	stack_a.top = a;
+	manual_sort(&stack_a);
+	ft_lstclear(&a, del);
+	return (0);
 }

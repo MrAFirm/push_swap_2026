@@ -6,29 +6,35 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:52:43 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/25 15:38:12 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/30 00:41:19 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# define BUFFER_SIZE 2
 
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft/libft.h"
 
-
 # include <stdio.h>
 
+typedef struct s_flag
+{
+	int flag;
+}	t_flag;
 
-typedef struct	stack_a
+typedef struct stack_a
 {
 	t_list			*top;
+	t_flag			*value;
 }	t_stack_a;
 
-typedef struct	stack_b
+typedef struct stack_b
 {
 	t_list			*top;
+	t_flag			*value;
 }	t_stack_b;
 
 typedef struct s_bench
@@ -51,67 +57,72 @@ typedef struct s_bench
 }	t_bench;
 
 /* Blocksize Calc Formula k ≈ √n */
-int	block_size(t_stack_a *stack_a);
-int	ft_sqrt(int nb);
+int		block_size(t_stack_a *stack_a);
+int		ft_sqrt(int nb);
 
 /* Operations */
-void	swap_a(t_stack_a *stack_a);
-void	swap_b(t_stack_b *stack_b);
-void	rotate_a(t_stack_a *stack_a);
-void	rotate_b(t_stack_b *stack_b);
-void	push_a(t_stack_a *stack_a, t_stack_b *stack_b);
-void	push_b(t_stack_a *stack_a, t_stack_b *stack_b);
+void	swap_a(t_stack_a *stack_a, t_bench *bench);
+void	swap_b(t_stack_b *stack_b, t_bench *bench);
+void	rotate_a(t_stack_a *stack_a, t_bench *bench);
+void	rotate_b(t_stack_b *stack_b, t_bench *bench);
+void	push_a(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
+void	push_b(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 
 /* Medium Algo Utils */
-void	push_range(t_stack_a *a, t_stack_b *b, int range_start, int range_end);
 int		*next_range_start(int range_start, int range_end, int blocksize);
 int		size_stack_a(t_stack_a *stack_a, int size);
-void	check_smallest(t_stack_a *stack_a, t_list *head, int manual_i, int *winner);
 void	coords_compress(t_stack_a *stack_a);
 
 /* Sort 3 & 5 Numbers */
-void    sort_3(t_stack_a *stack_a);
-void	sort_5(t_stack_a *stack_a, t_stack_b *stack_b);
+void	sort_3(t_stack_a *stack_a, t_bench *bench);
+void	sort_5(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 
 /* Simple and Medium Util */
 int		find_max(t_stack_b *stack_b);
-void	drain_b_to_a(t_stack_a *stack_a, t_stack_b *stack_b);
-void	de_bubble_sort(t_stack_a *stack_a, t_stack_b *stack_b);
+void	drain_b_to_a(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 
 /* Simple Algo n² */
-void	range_sort_algo_sim(t_stack_a *stack_a, t_stack_b *stack_b);
+void	bubble_sort(t_stack_a *stack_a, t_bench *bench);
 
 /* Medium Algo n√n */
-void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b);
+void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 float	compute_disorder(t_stack_a *stack_a);
-void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b);
+void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *be);
 
 /* Parsing Util */
 void	algo_select(char **av, t_list *a);
 
+/* Checker Bonus */
+void	check(t_stack_a *stack_a);
+void	manual_sort(t_stack_a *stack_a);
+char	*add_buffer(char *str, char *buffer);
+char	*ft_export(char **str);
+char	*get_next_line(int fd);
+
 /* Amanda's parts */
 /* Complex Algo n log n */
 void	index_stack(t_list *a);
-void	radix(t_list **a, t_list **b);
+void	radix(t_list **a, t_list **b, t_bench *bench);
 
 /* Complex Algo Operations */
-void	ra(t_list **a);
-void	pb(t_list **a, t_list **b);
-void	pa(t_list **a, t_list **b);
+void	ra(t_list **a, t_bench *bench);
+void	pb(t_list **a, t_list **b, t_bench *bench);
+void	pa(t_list **a, t_list **b, t_bench *bench);
 
 /* Parsing Utils */
 void	del(int content);
-int		check_mode(char **av);
 int		parsing_create(int ac, char **av, t_list **a);
 void	print_bench(t_bench *bench);
+void	init_bench(t_bench *bench, t_stack_a *stack_a);
+char	*ft_ftoa(float f, int mult);
+int		get_mult(void);
 
 /* END */
-
 /* Extra Operations NOT in use */
-void	rrotate_a(t_stack_a *stack_a);
-void	rrotate_b(t_stack_b *stack_b);
-void	swap_s(t_stack_a *stack_a, t_stack_b *stack_b);
-void	rotate_r(t_stack_a *stack_a, t_stack_b *stack_b);
-void	rrotate_r(t_stack_a *stack_a, t_stack_b *stack_b);
+void	rrotate_a(t_stack_a *stack_a, t_bench *bench);
+void	rrotate_b(t_stack_b *stack_b, t_bench *bench);
+void	swap_s(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
+void	rotate_r(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
+void	rrotate_r(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 
 #endif

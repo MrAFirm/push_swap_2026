@@ -49,23 +49,23 @@ void	index_stack(t_list *a)
 		return ;
 	x = a;
 	while (x)
-    {
+	{
 		i = 0;
 		y = copy;
 		while (y)
- 		{
+		{
 			if (y->content < x->content)
 				i++;
 			y = y->next;
 		}
-		x->content = i; 
+		x->content = i;
 		x = x->next;
 	}
 	ft_lstclear(&copy, del);
 }
 //indexes based on how many smaller values there are
 
-void	radix(t_list **a, t_list **b)
+void	radix(t_list **a, t_list **b, t_bench *bench)
 {
 	int	size;
 	int	max;
@@ -83,13 +83,13 @@ void	radix(t_list **a, t_list **b)
 		while (j < size)
 		{
 			if ((((*a)->content >> i) & 1) == 1)
-				ra(a);
+				ra(a, bench);
 			else
-				pb(a, b);
+				pb(a, b, bench);
 			j++;
 		}
 		while (*b != NULL)
-			pa(a, b);
+			pa(a, b, bench);
 		i++;
 	}
 }

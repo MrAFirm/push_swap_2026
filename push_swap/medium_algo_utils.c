@@ -12,34 +12,6 @@
 
 #include "push_swap.h"
 
-void	push_range(t_stack_a *a, t_stack_b *b, int range_start, int range_end)
-{
-	int		iter;
-
-	iter = range_start;
-	while (iter <= range_end)
-	{
-		if (range_end == 0 && range_start == 0 && a->top->index == 0 && !a->top->next)
-		{
-			push_b(a, b);
-			iter++;
-		}
-		else
-		{
-			if (a->top->index >= range_start && a->top->index <= range_end)
-			{
-				push_b(a, b);
-				iter++;
-				// if (b->top && b->top->next
-				// 	&& b->top->index < b->top->next->index)
-    			// 	swap_b(b);
-			}
-			else
-				rotate_a(a);
-		}
-	}
-}
-
 int	*next_range_start(int range_start, int range_end, int blocksize)
 {
 	int	*start_end_arr;
@@ -65,6 +37,33 @@ int	size_stack_a(t_stack_a *stack_a, int size)
 	head = stack_a->top;
 	size = (int)ft_lstsize(head);
 	return (size);
+}
+
+static void	check_smallest(t_stack_a *stack_a, t_list *h, int mi, int *w)
+{
+	int		match_flag;
+	int		k;
+	int		smallest;
+
+	smallest = 2147483647;
+	while (stack_a->top)
+	{
+		match_flag = 0;
+		k = 0;
+		while (k < mi)
+		{
+			if (w[k] == stack_a->top->content)
+				match_flag = 1;
+			k++;
+		}
+		if (match_flag == 0 && smallest > stack_a->top->content)
+			smallest = stack_a->top->content;
+		stack_a->top = stack_a->top->next;
+	}
+	w[mi] = smallest;
+	stack_a->top = h;
+	while (stack_a->top->content != smallest)
+		stack_a->top = stack_a->top->next;
 }
 
 void	coords_compress(t_stack_a *stack_a)
@@ -93,29 +92,12 @@ void	coords_compress(t_stack_a *stack_a)
 	stack_a->top = head;
 }
 
-void	check_smallest(t_stack_a *stack_a, t_list *head, int manual_i, int *winner)
+int	block_size(t_stack_a *stack_a)
 {
-	int		match_flag;
-	int		k;
-	int		smallest;
+	int	total_size;
+	int	blocksize;
 
-	smallest = 2147483647;
-	while (stack_a->top)
-	{
-		match_flag = 0;
-		k = 0;
-		while (k < manual_i)
-		{
-			if (winner[k] == stack_a->top->content)
-				match_flag = 1;
-			k++;
-		}
-		if (match_flag == 0 && smallest > stack_a->top->content)
-			smallest = stack_a->top->content;
-		stack_a->top = stack_a->top->next;
-	}
-	winner[manual_i] = smallest;
-	stack_a->top = head;
-	while (stack_a->top->content != smallest)
-		stack_a->top = stack_a->top->next;
+	total_size = ft_lstsize(stack_a->top);
+	blocksize = ft_sqrt(total_size);
+	return (blocksize);
 }
