@@ -6,29 +6,11 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 17:50:57 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/25 16:25:22 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/30 17:00:33 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	*next_range_start(int range_start, int range_end, int blocksize)
-{
-	int	*start_end_arr;
-
-	start_end_arr = ft_calloc(2, sizeof(int));
-	if (!start_end_arr)
-		return (start_end_arr);
-	range_start -= blocksize;
-	if (range_start < 0)
-		range_start = 0;
-	range_end -= blocksize;
-	if (range_end < 0)
-		range_end = 0;
-	start_end_arr[0] = range_start;
-	start_end_arr[1] = range_end;
-	return (start_end_arr);
-}
 
 int	size_stack_a(t_stack_a *stack_a, int size)
 {
@@ -89,6 +71,7 @@ void	coords_compress(t_stack_a *stack_a)
 		manual_i++;
 		i++;
 	}
+	free(winner);
 	stack_a->top = head;
 }
 

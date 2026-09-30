@@ -55,11 +55,10 @@ static void	algo_help(char **av, t_stack_a stack_a, t_bench *bench, t_list *a)
 	}
 	else if (check_mode(av, bench) == 4)
 		custom_adapt_algo(&stack_a, &stack_b, bench);
-	if (stack_a.value)
-		free(stack_a.value);
-	if (stack_b.value)
-		free(stack_b.value);
-	ft_lstclear(&a, del);
+	free(stack_a.value);
+	free(stack_b.value);
+	free(stack_a.top);
+	ft_lstclear(&stack_b.top, del);
 }
 
 void	algo_select(char **av, t_list *a)
@@ -82,5 +81,7 @@ void	algo_select(char **av, t_list *a)
 		return ;
 	init_bench(bench, &stack_a);
 	algo_help(av, stack_a, bench, a);
+	ft_lstclear(&a, del);
 	print_bench(bench);
+	free(bench);
 }

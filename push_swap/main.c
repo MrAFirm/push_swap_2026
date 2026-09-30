@@ -20,6 +20,7 @@ void	del(int content)
 int	main(int ac, char **av)
 {
 	t_list		*a;
+
 	if (ac <= 2)
 		return (0);
 	a = NULL;

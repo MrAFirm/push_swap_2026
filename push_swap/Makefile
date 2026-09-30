@@ -1,6 +1,5 @@
 NAME = push_swap
 CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I. -Ilibft
 SRCS = main.c radix.c rules_comp.c rules_med_sim_1.c rules_med_sim_2.c \
 extra_rules.c parsing.c adaptive_algo.c check_mode.c disorder_metric.c \
 bench.c medium_algo_utils.c medium_algo_range.c simple_algo_bubble.c sort_3_5.c
@@ -26,11 +25,14 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(NAME_BONUS)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
-bonus: $(BONUS)
+bonus: $(BONUS) $(LIBFT_SRC)
+	cp $(LIBFT_SRC) $(NAME)
+	cc $(CFLAGS) $(SRCS) $(LIBFT_SRC) -o $(NAME)
 	cc $(CFLAGS) $(BONUS) $(LIBFT_SRC) -o $(NAME_BONUS)
 
 .PHONY: all clean fclean re bonus

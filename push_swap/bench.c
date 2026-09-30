@@ -57,9 +57,12 @@ char	*dis_ftoa(t_stack_a *stack_a)
 
 void	init_bench(t_bench *bench, t_stack_a *stack_a)
 {
+	char	*dis;
+
+	dis = dis_ftoa(stack_a);
 	bench->enabled = 0;
 	bench->strategy = 0;
-	bench->disorder = dis_ftoa(stack_a);
+	bench->disorder = dis;
 	bench->total_ops = 0;
 	bench->sa = 0;
 	bench->sb = 0;
@@ -72,6 +75,7 @@ void	init_bench(t_bench *bench, t_stack_a *stack_a)
 	bench->rra = 0;
 	bench->rrb = 0;
 	bench->rrr = 0;
+	free(dis);
 }
 
 void	print_bench(t_bench *bench)

@@ -6,13 +6,13 @@
 /*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:52:43 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/30 00:41:19 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/09/30 17:20:59 by likhye-y         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# define BUFFER_SIZE 2
+# define BUFFER_SIZE 3
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -22,7 +22,7 @@
 
 typedef struct s_flag
 {
-	int flag;
+	int	flag;
 }	t_flag;
 
 typedef struct stack_a
@@ -69,7 +69,6 @@ void	push_a(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 void	push_b(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 
 /* Medium Algo Utils */
-int		*next_range_start(int range_start, int range_end, int blocksize);
 int		size_stack_a(t_stack_a *stack_a, int size);
 void	coords_compress(t_stack_a *stack_a);
 
@@ -94,7 +93,7 @@ void	algo_select(char **av, t_list *a);
 
 /* Checker Bonus */
 void	check(t_stack_a *stack_a);
-void	manual_sort(t_stack_a *stack_a);
+void	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench);
 char	*add_buffer(char *str, char *buffer);
 char	*ft_export(char **str);
 char	*get_next_line(int fd);
