@@ -72,12 +72,12 @@ To run our **`bonus part`**, `custom checker program`, do:
 make bonus
 ```
 Then you're able to pipe the checker at the end after you ran ./push_swap like so:
-```bash
+```
 shuf -i 0-9999 -n 500 > args.txt; ./push_swap --complex --bench $(cat args.txt) 2> bench.txt | ./checker $(cat args.txt)
 OK <-- Given by checker if operations are correct and list of numbers is sorted.
 ```
 Or something simple like:
-```bash
+```
 ./push_swap 2 3 4 1 | ./checker 2 3 4 1
 OK <-- Given by checker if operations are correct and list of numbers is sorted.
 ```
