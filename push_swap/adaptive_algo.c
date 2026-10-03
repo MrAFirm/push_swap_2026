@@ -37,5 +37,6 @@ void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *be)
 		index_stack(a);
 		radix(&a, &b, be);
 		free(b);
+		stack_a->top = a;
 	}
 }

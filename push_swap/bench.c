@@ -44,15 +44,13 @@ static void	rules_print_two(t_bench *bench)
 	write(2, "\n", 1);
 }
 
-char	*dis_ftoa(t_stack_a *stack_a)
+static char	*dis_ftoa(t_stack_a *stack_a)
 {
 	float	disorder;
-	int		mult;
 
 	disorder = 0.0;
 	disorder = compute_disorder(stack_a);
-	mult = get_mult();
-	return (ft_ftoa(disorder, mult));
+	return (ft_ftoa(disorder));
 }
 
 void	init_bench(t_bench *bench, t_stack_a *stack_a)
@@ -75,7 +73,7 @@ void	init_bench(t_bench *bench, t_stack_a *stack_a)
 	bench->rra = 0;
 	bench->rrb = 0;
 	bench->rrr = 0;
-	free(dis);
+	// free(dis);
 }
 
 void	print_bench(t_bench *bench)
@@ -84,7 +82,6 @@ void	print_bench(t_bench *bench)
 		return ;
 	ft_putstr_fd("[bench] disorder:   ", 2);
 	ft_putstr_fd(bench->disorder, 2);
-	free(bench->disorder);
 	ft_putstr_fd("%\n", 2);
 	ft_putstr_fd("[bench] strategy:   ", 2);
 	if (bench->strategy == 1)

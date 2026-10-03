@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   disorder_metric.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: likhye-y <likhye-y@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: lkhye-ya <lkhye-ya@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/10 17:38:21 by likhye-y          #+#    #+#             */
-/*   Updated: 2026/09/14 17:49:30 by likhye-y         ###   ########.fr       */
+/*   Updated: 2026/10/03 23:10:23 by lkhye-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,6 @@ static float	logic(t_list *head, t_list *c, int mistakes, int total_pairs)
 	return ((float)mistakes / (float)total_pairs);
 }
 
-int	get_mult(void)
-{
-	int	mult;
-	int	i;
-
-	i = 2;
-	mult = 1;
-	while (i-- > 0)
-		mult *= 10;
-	return (mult);
-}
-
 static char	*join_free(char *s1, char *s2)
 {
 	char	*ans;
@@ -82,13 +70,13 @@ static char	*join_free(char *s1, char *s2)
 	return (ans);
 }
 
-char	*ft_ftoa(float f, int mult)
+char	*ft_ftoa(float f)
 {
 	char	*ans;
 	char	*dec;
 	int		frac;
 
-	frac = (int)((f - (int)f) * mult);
+	frac = (int)((f - (int)f) * 100);
 	if (frac < 0)
 		frac = -frac;
 	dec = ft_itoa(frac);

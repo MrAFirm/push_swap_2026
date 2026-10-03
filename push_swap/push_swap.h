@@ -92,8 +92,8 @@ void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *be);
 void	algo_select(char **av, t_list *a);
 
 /* Checker Bonus */
-void	check(t_stack_a *stack_a);
-int	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench);
+void	check(t_stack_a *stack_a, t_stack_b *stack_b);
+int		manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench);
 char	*add_buffer(char *str, char *buffer);
 char	*ft_export(char **str);
 char	*get_next_line(int fd);
@@ -113,7 +113,7 @@ void	del(int content);
 int		parsing_create(int ac, char **av, t_list **a);
 void	print_bench(t_bench *bench);
 void	init_bench(t_bench *bench, t_stack_a *stack_a);
-char	*ft_ftoa(float f, int mult);
+char	*ft_ftoa(float f);
 int		get_mult(void);
 
 /* END */

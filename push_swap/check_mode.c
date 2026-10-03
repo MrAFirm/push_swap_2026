@@ -85,5 +85,6 @@ void	algo_select(char **av, t_list *a)
 	init_bench(bench, &stack_a);
 	algo_help(av, stack_a, bench, a);
 	print_bench(bench);
+	free(bench->disorder);
 	free(bench);
 }

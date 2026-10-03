@@ -17,7 +17,7 @@ void	del(int content)
 	(void)content;
 }
 
-void	check(t_stack_a *stack_a)
+void	check(t_stack_a *stack_a, t_stack_b *stack_b)
 {
 	float	disorder;
 
@@ -28,6 +28,9 @@ void	check(t_stack_a *stack_a)
 	else
 		write(1, "KO\n", 3);
 	free(stack_a->value);
+	ft_lstclear(&stack_a->top, del);
+	if (stack_b->top)
+		ft_lstclear(&stack_b->top, del);
 }
 
 int	main(int ac, char **av)
@@ -54,9 +57,6 @@ int	main(int ac, char **av)
 	stack_a.value->flag = 0;
 	init_bench(bench, &stack_a);
 	manual_sort(&stack_a, &b, bench);
-	stack_a.top = a;
-	ft_lstclear(&stack_a.top, del);
-	if (b.top)
-		ft_lstclear(&b.top, del);
+	free(b.value);
 	return (0);
 }

@@ -38,7 +38,7 @@ int	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench)
 			free(line);
 			line = get_next_line(0);
 		}
-		check(a);
+		check(a, b);
 	}
 	free(bench);
 	free(line);
