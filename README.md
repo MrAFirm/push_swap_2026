@@ -67,6 +67,46 @@ Error$
 ./push_swap 2 1 3 two --simple | cat -e
 Error$
 ```
+To run our **`bonus part`**, `custom checker program`, do:
+```
+make bonus
+```
+Then you're able to pipe the checker at the end after you ran ./push_swap like so:
+```bash
+shuf -i 0-9999 -n 500 > args.txt; ./push_swap --complex --bench $(cat args.txt) 2> bench.txt | ./checker $(cat args.txt)
+OK <-- Given by checker if operations are correct and list of numbers is sorted.
+```
+Or something simple like:
+```bash
+./push_swap 2 3 4 1 | ./checker 2 3 4 1
+OK <-- Given by checker if operations are correct and list of numbers is sorted.
+```
+Or you can just run ./checker directly and manually give it sorting operations / instructions, like:
+```
+./checker 2 3 4 1 [Tap the Enter key]
+rra [Tap the Enter key]
+[Ctrl + D to end User Input]
+OK <-- Given by checker if operations are correct and list of numbers is sorted.
+```
+In order for our program to wait for user input, we used our own get_next_line and helper functions to read for user input. (One instruction only)
+If you give the wrong operation or your ./push_swap algo used gave the wrong operations and the list of numbers aren't sorted, our ./checker program will output a KO. <br>
+For example:
+```
+./checker 2 3 4 1
+pa (Wrong operation, stack b has no node(s).)
+KO
+
+./checker 2 3 4 1
+sa
+ra
+rra
+pb
+pa
+KO <-- List not sorted.
+
+./push_swap 2 3 4 1 | ./checker 2 3 4 1
+KO <-- If your ./push_swap algorithm outputs the wrong operation(s), hence the list is not sorted.
+```
 
 ## Resources
 * (likhye-y) - I've had a conversation with Chatgpt after overhauling my medium algorithm, went from block-based partitioning method (block merge sort), to range based sort, since I came up with the range algo myself while rationalising my thoughts with AI, the only resources I used were for the scrapped algo, so there are no websites I used at all for the newly implemented algo.
