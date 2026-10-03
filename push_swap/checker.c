@@ -33,6 +33,34 @@ void	check(t_stack_a *stack_a, t_stack_b *stack_b)
 		ft_lstclear(&stack_b->top, del);
 }
 
+static int	free_check_1(t_flag *a_value)
+{
+	if (!a_value)
+		return (-1);
+	return (0);
+}
+
+static int	free_check_2(t_flag *a_value, t_flag *b_value)
+{
+	if (!b_value)
+	{
+		free(a_value);
+		return (-1);
+	}
+	return (0);
+}
+
+static int	free_check_3(t_flag *a_value, t_flag *b_value, t_bench *bench)
+{
+	if (!bench)
+	{
+		free(a_value);
+		free(b_value);
+		return (-1);
+	}
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_list		*a;
@@ -50,9 +78,13 @@ int	main(int ac, char **av)
 	}
 	stack_a.top = a;
 	stack_a.value = malloc(sizeof(*stack_a.value));
+	if (free_check_1(stack_a.value) == -1)
+		return (-1);
 	b.value = malloc(sizeof(*b.value));
+	if (free_check_2(stack_a.value, b.value) == -1)
+		return (-1);
 	bench = malloc(sizeof(t_bench));
-	if (!stack_a.value || !bench || !b.value)
+	if (free_check_3(stack_a.value, b.value, bench) == -1)
 		return (-1);
 	stack_a.value->flag = 0;
 	init_bench(bench, &stack_a);

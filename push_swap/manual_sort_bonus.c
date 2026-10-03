@@ -40,6 +40,7 @@ int	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench)
 		}
 		check(a, b);
 	}
+	free(bench->disorder);
 	free(bench);
 	free(line);
 	return (1);
