@@ -72,13 +72,17 @@ void	algo_select(char **av, t_list *a)
 
 	disorder = 0.0;
 	stack_a.top = a;
+	disorder = compute_disorder(&stack_a);
+	if (disorder == 0)
+	{
+		if (stack_a.top)
+			ft_lstclear(&stack_a.top, del);
+		return ;
+	}
 	stack_a.value = malloc(sizeof(*stack_a.value));
 	if (!stack_a.value)
 		return ;
 	stack_a.value->flag = 1;
-	disorder = compute_disorder(&stack_a);
-	if (disorder == 0)
-		return ;
 	bench = malloc(sizeof(t_bench));
 	if (!bench)
 		return ;

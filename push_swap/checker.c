@@ -23,7 +23,7 @@ void	check(t_stack_a *stack_a, t_stack_b *stack_b)
 
 	disorder = 0.0;
 	disorder = compute_disorder(stack_a);
-	if (disorder == 0)
+	if (!stack_b->top && disorder == 0)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
@@ -31,34 +31,6 @@ void	check(t_stack_a *stack_a, t_stack_b *stack_b)
 	ft_lstclear(&stack_a->top, del);
 	if (stack_b->top)
 		ft_lstclear(&stack_b->top, del);
-}
-
-static int	free_check_1(t_flag *a_value)
-{
-	if (!a_value)
-		return (-1);
-	return (0);
-}
-
-static int	free_check_2(t_flag *a_value, t_flag *b_value)
-{
-	if (!b_value)
-	{
-		free(a_value);
-		return (-1);
-	}
-	return (0);
-}
-
-static int	free_check_3(t_flag *a_value, t_flag *b_value, t_bench *bench)
-{
-	if (!bench)
-	{
-		free(a_value);
-		free(b_value);
-		return (-1);
-	}
-	return (0);
 }
 
 int	main(int ac, char **av)

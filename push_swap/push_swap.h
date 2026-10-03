@@ -92,6 +92,9 @@ void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *be);
 void	algo_select(char **av, t_list *a);
 
 /* Checker Bonus */
+int		free_check_1(t_flag *a_value);
+int		free_check_2(t_flag *a_value, t_flag *b_value);
+int		free_check_3(t_flag *a_value, t_flag *b_value, t_bench *bench);
 void	check(t_stack_a *stack_a, t_stack_b *stack_b);
 int		manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench);
 char	*add_buffer(char *str, char *buffer);

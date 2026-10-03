@@ -24,6 +24,11 @@ int	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench)
 	b->top = NULL;
 	b->value->flag = 0;
 	line = get_next_line(0);
+	if (!line && compute_disorder(a) == 0)
+	{
+		free(line);
+		check(a, b);
+	}
 	if (line)
 	{
 		while (line)
