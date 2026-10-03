@@ -93,7 +93,7 @@ void	algo_select(char **av, t_list *a);
 
 /* Checker Bonus */
 void	check(t_stack_a *stack_a);
-void	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench);
+int	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench);
 char	*add_buffer(char *str, char *buffer);
 char	*ft_export(char **str);
 char	*get_next_line(int fd);

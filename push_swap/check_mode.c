@@ -52,13 +52,16 @@ static void	algo_help(char **av, t_stack_a stack_a, t_bench *bench, t_list *a)
 		b = stack_b.top;
 		index_stack(a);
 		radix(&a, &b, bench);
+		stack_a.top = a;
 	}
 	else if (check_mode(av, bench) == 4)
 		custom_adapt_algo(&stack_a, &stack_b, bench);
 	free(stack_a.value);
 	free(stack_b.value);
-	free(stack_a.top);
-	ft_lstclear(&stack_b.top, del);
+	if (stack_a.top)
+		ft_lstclear(&stack_a.top, del);
+	if (stack_b.top)
+		ft_lstclear(&stack_b.top, del);
 }
 
 void	algo_select(char **av, t_list *a)
@@ -81,7 +84,6 @@ void	algo_select(char **av, t_list *a)
 		return ;
 	init_bench(bench, &stack_a);
 	algo_help(av, stack_a, bench, a);
-	ft_lstclear(&a, del);
 	print_bench(bench);
 	free(bench);
 }

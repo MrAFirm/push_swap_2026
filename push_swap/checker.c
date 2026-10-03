@@ -27,7 +27,6 @@ void	check(t_stack_a *stack_a)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
-	free(stack_a->top);
 	free(stack_a->value);
 }
 
@@ -55,7 +54,9 @@ int	main(int ac, char **av)
 	stack_a.value->flag = 0;
 	init_bench(bench, &stack_a);
 	manual_sort(&stack_a, &b, bench);
-	ft_lstclear(&a, del);
-	ft_lstclear(&b.top, del);
+	stack_a.top = a;
+	ft_lstclear(&stack_a.top, del);
+	if (b.top)
+		ft_lstclear(&b.top, del);
 	return (0);
 }

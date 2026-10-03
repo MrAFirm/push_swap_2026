@@ -43,6 +43,7 @@ void	index_stack(t_list *a)
 	t_list	*y;
 	t_list	*copy;
 	int		i;
+	int		ori_val;
 
 	copy = ft_lstcpy(a, del);
 	if (!copy)
@@ -52,10 +53,11 @@ void	index_stack(t_list *a)
 	{
 		i = 0;
 		y = copy;
+		ori_val = x->content;
 		while (y)
 		{
-			if (y->content < x->content)
-				i++;
+			if (y->content < ori_val)
+				i++ ;
 			y = y->next;
 		}
 		x->content = i;

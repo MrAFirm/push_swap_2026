@@ -84,6 +84,7 @@ void	print_bench(t_bench *bench)
 		return ;
 	ft_putstr_fd("[bench] disorder:   ", 2);
 	ft_putstr_fd(bench->disorder, 2);
+	free(bench->disorder);
 	ft_putstr_fd("%\n", 2);
 	ft_putstr_fd("[bench] strategy:   ", 2);
 	if (bench->strategy == 1)

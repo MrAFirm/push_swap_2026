@@ -17,7 +17,7 @@ static int	logic_2(char *line, t_stack_b *b, t_bench *bench);
 static int	logic_3(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench);
 static int	logic_4(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench);
 
-void	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench)
+int	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench)
 {
 	char		*line;
 
@@ -42,7 +42,7 @@ void	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench)
 	}
 	free(bench);
 	free(line);
-	free(b->value);
+	return (1);
 }
 
 static int	logic_1(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
