@@ -12,13 +12,15 @@
 
 #include "push_swap.h"
 
-static char		*str;
 
 char	*get_next_line(int fd)
 {
 	char			*buffer;
+	static char		*str;
 	int				bytes_read;
 
+	if (fd == -9)
+		return (free(str), str = NULL, NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -98,11 +100,6 @@ char	*ft_export(char **str)
 	return (ans);
 }
 
-void	clear_stat_buf()
-{
-	free(str);
-	str = NULL;
-}
 /*
 tmp is for the str after \n
 read(fd, *start, buffer_size)

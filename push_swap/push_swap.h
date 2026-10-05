@@ -100,7 +100,6 @@ int		free_check_3(t_flag *a_value, t_flag *b_value, t_bench *bench);
 int		man_sort_check(t_stack_a *a, t_stack_b *b, char *line, t_bench *bench);
 void	check(t_stack_a *stack_a, t_stack_b *stack_b);
 int		manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench);
-void	clear_stat_buf();
 char	*add_buffer(char *str, char *buffer);
 char	*ft_export(char **str);
 char	*get_next_line(int fd);

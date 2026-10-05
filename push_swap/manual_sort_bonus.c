@@ -39,9 +39,9 @@ int	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench)
 		}
 		free(line);
 		line = get_next_line(0);
-	}	
+	}
 	check(a, b);
-	clear_stat_buf();
+	get_next_line(-9);
 	free(bench->disorder);
 	return (free(bench), 1);
 }
