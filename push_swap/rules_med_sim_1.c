@@ -16,6 +16,8 @@ void	swap_a(t_stack_a *stack_a, t_bench *bench)
 {
 	int	temp;
 
+	if (!stack_a->top || !stack_a->top->next)
+		return ;
 	temp = stack_a->top->content;
 	stack_a->top->content = stack_a->top->next->content;
 	stack_a->top->next->content = temp;
@@ -29,6 +31,8 @@ void	swap_b(t_stack_b *stack_b, t_bench *bench)
 {
 	int	temp;
 
+	if (!stack_b->top || !stack_b->top->next)
+		return ;
 	temp = stack_b->top->content;
 	stack_b->top->content = stack_b->top->next->content;
 	stack_b->top->next->content = temp;

@@ -27,7 +27,6 @@ static t_list	*ft_lstcpy(t_list *l, void (d)(int))
 		tmp = ft_lstnew(c);
 		if (!tmp)
 		{
-			d(c);
 			ft_lstclear(&copy, d);
 			return (NULL);
 		}

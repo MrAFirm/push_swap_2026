@@ -71,7 +71,10 @@ int	parsing_create(int ac, char **av, t_list **a)
 	while (i < ac)
 	{
 		if (is_flag(av[i]))
-			i++;
+		{
+			if (i > 2 || is_numeric(av[1]))
+				return (ft_lstclear(a, del), 0);
+		}
 		else
 		{
 			if (!parse_int(av[i], &value) || has_duplicate(*a, (int)value))
@@ -80,8 +83,8 @@ int	parsing_create(int ac, char **av, t_list **a)
 			if (!tmp)
 				return (ft_lstclear(a, del), 0);
 			ft_lstadd_back(a, tmp);
-			i++;
 		}
+		i++;
 	}
 	return (1);
 }

@@ -90,13 +90,17 @@ void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *be);
 
 /* Parsing Util */
 void	algo_select(char **av, t_list *a);
+void	algo_help(char **av, t_stack_a stack_a, t_bench *bench);
+void	algo_mid(t_stack_a stack_a, char **av);
 
 /* Checker Bonus */
 int		free_check_1(t_flag *a_value);
 int		free_check_2(t_flag *a_value, t_flag *b_value);
 int		free_check_3(t_flag *a_value, t_flag *b_value, t_bench *bench);
+int		man_sort_check(t_stack_a *a, t_stack_b *b, char *line, t_bench *bench);
 void	check(t_stack_a *stack_a, t_stack_b *stack_b);
 int		manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench);
+void	clear_stat_buf();
 char	*add_buffer(char *str, char *buffer);
 char	*ft_export(char **str);
 char	*get_next_line(int fd);

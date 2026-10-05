@@ -49,6 +49,8 @@ static char	*dis_ftoa(t_stack_a *stack_a)
 	float	disorder;
 
 	disorder = 0.0;
+	if (ft_lstsize(stack_a->top) == 1)
+		return (ft_ftoa(disorder));
 	disorder = compute_disorder(stack_a);
 	return (ft_ftoa(disorder));
 }
@@ -73,7 +75,6 @@ void	init_bench(t_bench *bench, t_stack_a *stack_a)
 	bench->rra = 0;
 	bench->rrb = 0;
 	bench->rrr = 0;
-	// free(dis);
 }
 
 void	print_bench(t_bench *bench)

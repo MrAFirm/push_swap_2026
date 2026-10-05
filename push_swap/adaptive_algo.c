@@ -40,3 +40,22 @@ void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *be)
 		stack_a->top = a;
 	}
 }
+
+void	algo_mid(t_stack_a stack_a, char **av)
+{
+	t_bench		*bench;
+
+	bench = malloc(sizeof(t_bench));
+	if (!bench)
+	{
+		free(stack_a.value);
+		ft_lstclear(&stack_a.top, del);
+		return ;
+	}
+	init_bench(bench, &stack_a);
+	algo_help(av, stack_a, bench);
+	print_bench(bench);
+	if (bench->disorder)
+		free(bench->disorder);
+	free(bench);
+}

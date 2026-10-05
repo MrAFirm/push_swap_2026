@@ -12,10 +12,11 @@
 
 #include "push_swap.h"
 
+static char		*str;
+
 char	*get_next_line(int fd)
 {
 	char			*buffer;
-	static char		*str;
 	int				bytes_read;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -64,8 +65,11 @@ char	*add_buffer(char *str, char *buffer)
 	free(str);
 	return (new);
 }
-//we start i and j at -1 so that we can use ++i and ++j
-//saving total lines used
+
+/*
+we start i and j at -1 so that we can use ++i and ++j
+saving total lines used
+*/
 
 char	*ft_export(char **str)
 {
@@ -94,10 +98,17 @@ char	*ft_export(char **str)
 	return (ans);
 }
 
-//tmp is for the str after \n
-//read(fd, *start, buffer_size)
-//the static variable keeps everything after the newline EVERY
-//TIME gnl is called in the main.
+void	clear_stat_buf()
+{
+	free(str);
+	str = NULL;
+}
+/*
+tmp is for the str after \n
+read(fd, *start, buffer_size)
+the static variable keeps everything after the newline EVERY
+TIME gnl is called in the main.
+*/
 /*
 #include <stdio.h>
 int	main(void)

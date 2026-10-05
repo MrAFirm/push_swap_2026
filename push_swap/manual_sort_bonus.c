@@ -12,46 +12,41 @@
 
 #include "push_swap.h"
 
-static int	logic_1(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench);
-static int	logic_2(char *line, t_stack_b *b, t_bench *bench);
-static int	logic_3(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench);
-static int	logic_4(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench);
+static int	l_1(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench);
+static int	l_2(char *line, t_stack_b *b, t_bench *bench);
+static int	l_3(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench);
+static int	l_4(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench);
 
 int	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench)
 {
-	char		*line;
+	char	*line;
 
 	b->top = NULL;
 	b->value->flag = 0;
 	line = get_next_line(0);
 	if (!line && compute_disorder(a) == 0)
-	{
 		free(line);
-		check(a, b);
-	}
-	if (line)
+	while (line)
 	{
-		while (line)
+		if (!l_1(line, a, b, bench) && !l_2(line, b, bench)
+			&& !l_3(line, a, b, bench)
+			&& !l_4(line, a, b, bench))
 		{
-			if (!logic_1(line, a, b, bench) && !logic_2(line, b, bench)
-				&& !logic_3(line, a, b, bench)
-				&& !logic_4(line, a, b, bench))
-			{
-				write(2, "Error\n", 6);
-				break ;
-			}
+			write(2, "Error\n", 6);
+			a->value->flag = 2;
 			free(line);
-			line = get_next_line(0);
+			break ;
 		}
-		check(a, b);
-	}
+		free(line);
+		line = get_next_line(0);
+	}	
+	check(a, b);
+	clear_stat_buf();
 	free(bench->disorder);
-	free(bench);
-	free(line);
-	return (1);
+	return (free(bench), 1);
 }
 
-static int	logic_1(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
+static int	l_1(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
 {
 	if (ft_strncmp(line, "sa", 2) == 0)
 	{
@@ -76,73 +71,52 @@ static int	logic_1(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
 	return (0);
 }
 
-static int	logic_2(char *line, t_stack_b *b, t_bench *bench)
+static int	l_2(char *line, t_stack_b *b, t_bench *bench)
 {
 	if (ft_strncmp(line, "sb", 2) == 0)
 	{
-		if (b->top && b->top->next)
-		{
-			swap_b(b, bench);
-			return (1);
-		}
+		swap_b(b, bench);
+		return (1);
 	}
 	else if (ft_strncmp(line, "rb", 2) == 0)
 	{
-		if (b->top && b->top->next)
-		{
-			rotate_b(b, bench);
-			return (1);
-		}
+		rotate_b(b, bench);
+		return (1);
 	}
 	return (0);
 }
 
-static int	logic_3(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
+static int	l_3(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
 {
 	if (ft_strncmp(line, "ss", 2) == 0)
 	{
-		if (a->top && b->top)
-		{
-			swap_s(a, b, bench);
-			return (1);
-		}
+		swap_s(a, b, bench);
+		return (1);
 	}
 	else if (ft_strncmp(line, "rrr", 3) == 0)
 	{
-		if (a->top && b->top)
-		{
-			rrotate_r(a, b, bench);
-			return (1);
-		}
+		rrotate_r(a, b, bench);
+		return (1);
 	}
 	else if (ft_strncmp(line, "rrb", 3) == 0)
 	{
-		if (b->top && b->top->next)
-		{
-			rrotate_b(b, bench);
-			return (1);
-		}
+		rrotate_b(b, bench);
+		return (1);
 	}
 	return (0);
 }
 
-static int	logic_4(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
+static int	l_4(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
 {
 	if (ft_strncmp(line, "rr", 2) == 0)
 	{
-		if (a->top && b->top)
-		{
-			rotate_r(a, b, bench);
-			return (1);
-		}
+		rotate_r(a, b, bench);
+		return (1);
 	}
 	else if (ft_strncmp(line, "pa", 2) == 0)
 	{
-		if (b->top)
-		{
-			push_a(a, b, bench);
-			return (1);
-		}
+		push_a(a, b, bench);
+		return (1);
 	}
 	return (0);
 }
