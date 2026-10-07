@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 {
 	t_list		*a;
 
-	if (ac <= 2)
+	if (ac <= 1)
 		return (0);
 	a = NULL;
 	if (!parsing_create(ac, av, &a) || !a)

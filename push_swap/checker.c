@@ -25,8 +25,7 @@ void	check(t_stack_a *stack_a, t_stack_b *stack_b)
 	disorder = compute_disorder(stack_a);
 	if (stack_a->value->flag == 0)
 	{
-		if ((!stack_b->top && disorder == 0)
-			|| ft_lstsize(stack_a->top) == 1)
+		if ((!stack_b->top && disorder == 0))
 			write(1, "OK\n", 3);
 		else
 			write(1, "KO\n", 3);

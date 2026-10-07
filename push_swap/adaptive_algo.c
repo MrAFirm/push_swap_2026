@@ -12,32 +12,55 @@
 
 #include "push_swap.h"
 
+static void	adaptive_help(t_stack_a *s_a, t_stack_b *s_b, t_bench *be, float dis);
+
 void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *be)
 {
 	float	disorder;
-	t_list	*a;
-	t_list	*b;
 
 	disorder = 0.0;
-	a = stack_a->top;
-	b = stack_b->top;
 	disorder = compute_disorder(stack_a);
 	if (disorder == 0)
 		return ;
 	else if (ft_lstsize(stack_a->top) == 3)
+	{
 		sort_3(stack_a, be);
+		be->strategy = 7;
+	}
 	else if (ft_lstsize(stack_a->top) == 5)
+	{
 		sort_5(stack_a, stack_b, be);
-	else if (disorder < 0.2)
-		bubble_sort(stack_a, be);
-	else if (disorder >= 0.2 && disorder < 0.5)
-		range_sort_algo(stack_a, stack_b, be);
-	else if (disorder >= 0.5)
+		be->strategy = 7;
+	}
+	else
+		adaptive_help(stack_a, stack_b, be, disorder);
+}
+
+static void	adaptive_help(t_stack_a *s_a, t_stack_b *s_b, t_bench *be, float dis)
+{
+	t_list	*a;
+	t_list	*b;
+
+	a = s_a->top;
+	b = s_b->top;
+
+	if (dis < 0.2)
+	{
+		simple_select_algo(s_a, s_b, be);
+		be->strategy = 4;
+	}
+	else if (dis >= 0.2 && dis < 0.5)
+	{
+		range_sort_algo(s_a, s_b, be);
+		be->strategy = 5;
+	}
+	else if (dis >= 0.5)
 	{
 		index_stack(a);
 		radix(&a, &b, be);
 		free(b);
-		stack_a->top = a;
+		s_a->top = a;
+		be->strategy = 6;
 	}
 }
 
@@ -58,4 +81,16 @@ void	algo_mid(t_stack_a stack_a, char **av)
 	if (bench->disorder)
 		free(bench->disorder);
 	free(bench);
+}
+
+void	adaptive_help_be(t_bench *bench)
+{
+	if (bench->strategy == 4)
+		ft_putstr_fd("Adaptive / O(n^2)\n", 2);
+	else if (bench->strategy == 5)
+		ft_putstr_fd("Adaptive / O(n√n)\n", 2);
+	else if (bench->strategy == 6)
+		ft_putstr_fd("Adaptive / O(n log n)\n", 2);
+	else if (bench->strategy == 7)
+		ft_putstr_fd("Adaptive / O(n)\n", 2);
 }

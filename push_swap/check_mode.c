@@ -53,7 +53,7 @@ void	algo_help(char **av, t_stack_a stack_a, t_bench *bench)
 	}
 	stack_b.value->flag = 1;
 	if (check_mode(av, bench) == 1)
-		bubble_sort(&stack_a, bench);
+		simple_select_algo(&stack_a, &stack_b, bench);
 	else if (check_mode(av, bench) == 2)
 		range_sort_algo(&stack_a, &stack_b, bench);
 	else if (check_mode(av, bench) == 3)

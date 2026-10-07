@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-
 char	*get_next_line(int fd)
 {
 	char			*buffer;

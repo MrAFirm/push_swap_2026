@@ -19,7 +19,7 @@ void	rrotate_a(t_stack_a *stack_a, t_bench *bench)
 	t_list	*lst;
 	t_list	*last;
 
-	if (!stack_a->top)
+	if (!stack_a->top || !stack_a->top->next)
 		return ;
 	lst = stack_a->top;
 	last = ft_lstlast(stack_a->top);
@@ -43,7 +43,7 @@ void	rrotate_b(t_stack_b *stack_b, t_bench *bench)
 	t_list	*lst;
 	t_list	*last;
 
-	if (!stack_b->top)
+	if (!stack_b->top || !stack_b->top->next)
 		return ;
 	lst = stack_b->top;
 	last = ft_lstlast(stack_b->top);

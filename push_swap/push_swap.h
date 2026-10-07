@@ -80,10 +80,8 @@ void	sort_5(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 int		find_max(t_stack_b *stack_b);
 void	drain_b_to_a(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 
-/* Simple Algo n² */
-void	bubble_sort(t_stack_a *stack_a, t_bench *bench);
-
-/* Medium Algo n√n */
+/* Simple Algo n² and Medium Algo n√n */
+void	simple_select_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 void	range_sort_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *bench);
 float	compute_disorder(t_stack_a *stack_a);
 void	custom_adapt_algo(t_stack_a *stack_a, t_stack_b *stack_b, t_bench *be);
@@ -116,6 +114,7 @@ void	pa(t_list **a, t_list **b, t_bench *bench);
 
 /* Parsing Utils */
 void	del(int content);
+void	adaptive_help_be(t_bench *bench);
 int		parsing_create(int ac, char **av, t_list **a);
 void	print_bench(t_bench *bench);
 void	init_bench(t_bench *bench, t_stack_a *stack_a);

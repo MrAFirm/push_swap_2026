@@ -54,6 +54,8 @@ static int	parse_int(char *str, long *value)
 {
 	if (!is_numeric(str))
 		return (0);
+	if (ft_strlen(str) >= 12)
+		return (0);
 	*value = ft_atoi(str);
 	if (*value > 2147483647 || *value < -2147483648)
 		return (0);

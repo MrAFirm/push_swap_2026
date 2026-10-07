@@ -49,9 +49,7 @@ static char	*dis_ftoa(t_stack_a *stack_a)
 	float	disorder;
 
 	disorder = 0.0;
-	if (ft_lstsize(stack_a->top) == 1)
-		return (ft_ftoa(disorder));
-	disorder = compute_disorder(stack_a);
+	disorder = compute_disorder(stack_a) * 100;
 	return (ft_ftoa(disorder));
 }
 
@@ -82,7 +80,13 @@ void	print_bench(t_bench *bench)
 	if (bench->enabled == 0)
 		return ;
 	ft_putstr_fd("[bench] disorder:   ", 2);
-	ft_putstr_fd(bench->disorder, 2);
+	if (bench->disorder[3] == '0' || bench->disorder[4] == '0')
+	{
+		ft_putstr_fd(bench->disorder, 2);
+		write(2, "0", 1);
+	}
+	else
+		ft_putstr_fd(bench->disorder, 2);
 	ft_putstr_fd("%\n", 2);
 	ft_putstr_fd("[bench] strategy:   ", 2);
 	if (bench->strategy == 1)
@@ -91,8 +95,8 @@ void	print_bench(t_bench *bench)
 		ft_putstr_fd("Medium / O(n√n)\n", 2);
 	else if (bench->strategy == 3)
 		ft_putstr_fd("Complex / O(n log n)\n", 2);
-	else
-		ft_putstr_fd("Adaptive / O(n√n)\n", 2);
+	else if (bench->strategy >= 4)
+		adaptive_help_be(bench);
 	ft_putstr_fd("[bench] total_ops:  ", 2);
 	ft_putnbr_fd(bench->total_ops, 2);
 	write(2, "\n", 1);

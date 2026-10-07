@@ -20,14 +20,12 @@ float	compute_disorder(t_stack_a *stack_a)
 	int		mistakes;
 	int		total_pairs;
 	t_list	*c;
-	float	result;
 
 	head = stack_a->top;
 	mistakes = 0;
 	total_pairs = 0;
 	c = stack_a->top;
-	result = logic(head, c, mistakes, total_pairs);
-	return (result);
+	return (logic(head, c, mistakes, total_pairs));
 }
 
 static float	logic(t_list *head, t_list *c, int mistakes, int total_pairs)
@@ -38,8 +36,9 @@ static float	logic(t_list *head, t_list *c, int mistakes, int total_pairs)
 	t_list	*iter_node;
 
 	size = (int)ft_lstsize(head);
+	if (size <= 1)
+		return (0.0);
 	i = 0;
-	j = 0;
 	while (i < size - 1)
 	{
 		j = i + 1;

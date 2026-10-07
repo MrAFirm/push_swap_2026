@@ -48,22 +48,22 @@ int	manual_sort(t_stack_a *a, t_stack_b *b, t_bench *bench)
 
 static int	l_1(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
 {
-	if (ft_strncmp(line, "sa", 2) == 0)
+	if (ft_strncmp(line, "sa\n", 3) == 0)
 	{
 		swap_a(a, bench);
 		return (1);
 	}
-	else if (ft_strncmp(line, "ra", 2) == 0)
+	else if (ft_strncmp(line, "ra\n", 3) == 0)
 	{
 		rotate_a(a, bench);
 		return (1);
 	}
-	else if (ft_strncmp(line, "rra", 3) == 0)
+	else if (ft_strncmp(line, "rra\n", 4) == 0)
 	{
 		rrotate_a(a, bench);
 		return (1);
 	}
-	else if (ft_strncmp(line, "pb", 2) == 0)
+	else if (ft_strncmp(line, "pb\n", 3) == 0)
 	{
 		push_b(a, b, bench);
 		return (1);
@@ -73,12 +73,12 @@ static int	l_1(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
 
 static int	l_2(char *line, t_stack_b *b, t_bench *bench)
 {
-	if (ft_strncmp(line, "sb", 2) == 0)
+	if (ft_strncmp(line, "sb\n", 3) == 0)
 	{
 		swap_b(b, bench);
 		return (1);
 	}
-	else if (ft_strncmp(line, "rb", 2) == 0)
+	else if (ft_strncmp(line, "rb\n", 3) == 0)
 	{
 		rotate_b(b, bench);
 		return (1);
@@ -88,17 +88,17 @@ static int	l_2(char *line, t_stack_b *b, t_bench *bench)
 
 static int	l_3(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
 {
-	if (ft_strncmp(line, "ss", 2) == 0)
+	if (ft_strncmp(line, "ss\n", 3) == 0)
 	{
 		swap_s(a, b, bench);
 		return (1);
 	}
-	else if (ft_strncmp(line, "rrr", 3) == 0)
+	else if (ft_strncmp(line, "rrr\n", 4) == 0)
 	{
 		rrotate_r(a, b, bench);
 		return (1);
 	}
-	else if (ft_strncmp(line, "rrb", 3) == 0)
+	else if (ft_strncmp(line, "rrb\n", 4) == 0)
 	{
 		rrotate_b(b, bench);
 		return (1);
@@ -108,12 +108,12 @@ static int	l_3(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
 
 static int	l_4(char *line, t_stack_a *a, t_stack_b *b, t_bench *bench)
 {
-	if (ft_strncmp(line, "rr", 2) == 0)
+	if (ft_strncmp(line, "rr\n", 3) == 0)
 	{
 		rotate_r(a, b, bench);
 		return (1);
 	}
-	else if (ft_strncmp(line, "pa", 2) == 0)
+	else if (ft_strncmp(line, "pa\n", 3) == 0)
 	{
 		push_a(a, b, bench);
 		return (1);
